@@ -8,7 +8,7 @@ const { name, blurb, phone, email, address, hours, explore, services, cta } = As
     <div>
       <p class="font-display text-3xl">{name}</p>
       <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{blurb}</p>
-      <a href={cta.href} class="btn-primary mt-7">{cta.text}</a>
+      <a href={cta.href} class="pbtn mt-7">{cta.text}</a>
     </div>
     <nav aria-label="Explore"><h2 class="micro mb-5 text-signal-soft">Explore</h2><ul class="space-y-3 text-sm text-white/75">{explore.map((l) => <li><a class="hover:text-white" href={l.href}>{l.text}</a></li>)}</ul></nav>
     <nav aria-label="Services"><h2 class="micro mb-5 text-signal-soft">Services</h2><ul class="space-y-3 text-sm text-white/75">{services.map((l) => <li><a class="hover:text-white" href={l.href}>{l.text}</a></li>)}</ul></nav>

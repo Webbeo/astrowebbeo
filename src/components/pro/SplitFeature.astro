@@ -14,6 +14,6 @@ const { focal = 'center', eyebrow, title, paragraphs, image, imageAlt = '', href
     <h2 class="h-display text-4xl text-ink sm:text-5xl" set:html={emph(title)} />
     <div class="mt-6 space-y-4 text-base leading-relaxed text-stone sm:text-[1.05rem]">{paragraphs.map((p) => <p>{p}</p>)}</div>
     {points.length > 0 && <ul class="mt-8 grid gap-5 border-t border-line pt-8 sm:grid-cols-2">{points.map((p) => <li><p class="font-display text-xl text-ink">{p.title}</p><p class="mt-1 text-sm leading-relaxed text-stone">{p.text}</p></li>)}</ul>}
-    {href && cta && <a href={href} class="btn-outline mt-9 text-ink">{cta}</a>}
+    {href && cta && <a href={href} class="pbtn-outline mt-9 text-ink">{cta}</a>}
   </div>
 </div></section>

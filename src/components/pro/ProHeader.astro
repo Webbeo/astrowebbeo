@@ -20,7 +20,7 @@ const { name, mark, sub, phone, strap, links, cta } = Astro.props;
       </a>
       <nav aria-label="Primary" class="hidden items-center gap-8 lg:flex">{links.map((l) => <a href={l.href} class="nav-link">{l.text}</a>)}</nav>
       <div class="flex items-center gap-3">
-        <a href={cta.href} class="btn-primary hidden sm:inline-flex">{cta.text}</a>
+        <a href={cta.href} class="pbtn hidden sm:inline-flex">{cta.text}</a>
         <a href={tel(phone)} aria-label={`Call ${phone}`} class="inline-flex h-11 w-11 items-center justify-center border border-line text-ink sm:hidden"><Icon name="tabler:phone" class="h-5 w-5" /></a>
         <button type="button" class="-mr-2 inline-flex h-11 w-11 items-center justify-center text-ink lg:hidden" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu" data-nav-toggle><Icon name="tabler:menu-2" class="h-6 w-6" /></button>
       </div>
@@ -29,7 +29,7 @@ const { name, mark, sub, phone, strap, links, cta } = Astro.props;
   <div id="mobile-nav" data-nav-panel hidden class="absolute inset-x-0 top-full min-h-[calc(100dvh-72px)] border-b border-line bg-surface shadow-lift lg:hidden">
     <nav aria-label="Mobile" class="container-page py-6">
       <ul class="divide-y divide-line">{links.map((l) => <li><a href={l.href} class="flex items-center justify-between py-5 font-display text-3xl text-ink">{l.text}<span aria-hidden="true" class="text-signal">→</span></a></li>)}</ul>
-      <div class="mt-8 grid gap-3"><a href={cta.href} class="btn-primary w-full">{cta.text}</a><a href={tel(phone)} class="btn-outline w-full text-ink">Call {phone}</a></div>
+      <div class="mt-8 grid gap-3"><a href={cta.href} class="pbtn w-full">{cta.text}</a><a href={tel(phone)} class="pbtn-outline w-full text-ink">Call {phone}</a></div>
     </nav>
   </div>
 </header>
