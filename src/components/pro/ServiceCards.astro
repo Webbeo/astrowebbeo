@@ -1,0 +1,25 @@
+---
+import ProImage from './ProImage.astro';
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+// layout "feature": first two cards large, the rest small (12-col rhythm). "grid": equal 3-up.
+interface Props { eyebrow?: string; title: string; intro?: string; href?: string; cta?: string; layout?: 'feature' | 'grid'; items: { title: string; summary: string; image: string; href: string }[]; }
+const { eyebrow, title, intro, href, cta, layout = 'grid', items } = Astro.props;
+const big = (i: number) => layout === 'feature' && i < 2;
+---
+<section class="bg-surface py-20 lg:py-28"><div class="container-page">
+  <SectionHead {eyebrow} {title} {intro} {href} {cta} />
+  <div class:list={['mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2', layout === 'feature' ? 'lg:grid-cols-12' : 'lg:grid-cols-3']}>
+    {items.map((s, i) => (
+      <a href={s.href} class:list={['group block', REVEAL, layout === 'feature' && (big(i) ? 'lg:col-span-6' : 'lg:col-span-3')]}>
+        <div class:list={['relative overflow-hidden bg-surface-2', big(i) ? 'aspect-[4/3] lg:aspect-[16/11]' : 'aspect-[4/3] lg:aspect-[3/4]']}>
+          <ProImage src={s.image} alt={s.title} sizes={big(i) ? '(min-width:1024px) 600px, 100vw' : '(min-width:1024px) 300px, 50vw'} class="h-full w-full object-cover transition-transform duration-[900ms] ease-brand group-hover:scale-105" />
+          <span class="micro absolute left-0 top-0 bg-surface px-3 py-2 text-ink">{String(i + 1).padStart(2, '0')}</span>
+        </div>
+        <h3 class:list={['h-display mt-5 text-ink transition-colors group-hover:text-signal', big(i) ? 'text-3xl' : 'text-2xl']}>{s.title}</h3>
+        <p class="mt-2 text-[0.95rem] leading-relaxed text-stone">{s.summary}</p>
+        <span class="micro mt-4 inline-flex items-center gap-2 text-ink">Find out more <span aria-hidden="true" class="text-signal transition-transform group-hover:translate-x-1">→</span></span>
+      </a>
+    ))}
+  </div>
+</div></section>

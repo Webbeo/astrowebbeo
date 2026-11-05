@@ -1,0 +1,19 @@
+---
+import ProImage from './ProImage.astro';
+import { emph, REVEAL } from '~/utils/pro';
+interface Props { focal?: string; eyebrow?: string; title: string; paragraphs: string[]; image: string; imageAlt?: string; href?: string; cta?: string; points?: { title: string; text: string }[]; flip?: boolean; tone?: 'paper' | 'sand'; }
+const { focal = 'center', eyebrow, title, paragraphs, image, imageAlt = '', href, cta, points = [], flip = false, tone = 'paper' } = Astro.props;
+---
+<section class:list={[tone === 'sand' ? 'bg-surface-2' : 'bg-surface', 'py-20 lg:py-28']}><div class="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+  <div class:list={[REVEAL, 'relative aspect-[5/6] overflow-hidden bg-surface-2 lg:aspect-[4/5]', flip && 'lg:order-2']}>
+    <ProImage src={image} alt={imageAlt} focal={focal} sizes="(min-width:1024px) 600px, 100vw" class="h-full w-full object-cover" />
+    <div class="accent-rule absolute bottom-0 left-0 h-1.5 w-1/3 bg-signal"></div>
+  </div>
+  <div class={REVEAL}>
+    {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+    <h2 class="h-display text-4xl text-ink sm:text-5xl" set:html={emph(title)} />
+    <div class="mt-6 space-y-4 text-base leading-relaxed text-stone sm:text-[1.05rem]">{paragraphs.map((p) => <p>{p}</p>)}</div>
+    {points.length > 0 && <ul class="mt-8 grid gap-5 border-t border-line pt-8 sm:grid-cols-2">{points.map((p) => <li><p class="font-display text-xl text-ink">{p.title}</p><p class="mt-1 text-sm leading-relaxed text-stone">{p.text}</p></li>)}</ul>}
+    {href && cta && <a href={href} class="pbtn-outline mt-9 text-ink">{cta}</a>}
+  </div>
+</div></section>

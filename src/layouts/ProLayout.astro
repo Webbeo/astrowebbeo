@@ -1,0 +1,25 @@
+---
+// Page shell for the trade-pro starter. Builds header/footer from the site's src/data/content.json.
+import Layout from '~/layouts/Layout.astro';
+import DemoBanner from '~/components/parts/DemoBanner.astro';
+import ProHeader from '~/components/pro/ProHeader.astro';
+import ProFooter from '~/components/pro/ProFooter.astro';
+import { fade } from 'astro:transitions';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+import type { MetaData } from '~/types';
+export interface Props { metadata?: MetaData; }
+const { metadata } = Astro.props;
+const b = c.business;
+const links = [{ text: 'Services', href: getPermalink('/services') }, { text: 'About', href: getPermalink('/about') }, { text: 'Contact', href: getPermalink('/contact') }];
+const cta = { text: b.ctaText ?? 'Get a quote', href: getPermalink('/contact') };
+---
+<Layout metadata={metadata}>
+  <slot name="head" slot="head" />
+  <DemoBanner />
+  <ProHeader name={b.name} mark={b.mark} sub={b.sub} phone={b.phone} strap={b.strap} links={links} cta={cta} />
+  <main class="flex-1" transition:animate={fade({ duration: '0.35s' })}><slot /></main>
+  <ProFooter name={b.name} blurb={b.footerBlurb} phone={b.phone} email={b.email} address={b.address} hours={b.hours}
+    explore={[{ text: 'Home', href: getPermalink('/') }, ...links]}
+    services={c.services.map((s) => ({ text: s.title, href: getPermalink(`/services/${s.slug}`) }))} cta={cta} />
+</Layout>

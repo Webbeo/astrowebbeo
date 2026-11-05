@@ -1,0 +1,63 @@
+/* Webbeo visual layer. Per-site CustomStyles.astro sets the --pro-* variables (palette, fonts);
+   everything below follows. Square corners, tracked uppercase micro-type, one accent colour. */
+@theme {
+  --color-surface: var(--pro-surface, #f6f1e8);
+  --color-surface-2: var(--pro-surface-2, #ece4d4);
+  --color-ink: var(--pro-ink, #14262e);
+  --color-ink-deep: var(--pro-ink-deep, #0c1a20);
+  --color-signal: var(--pro-signal, #c2612d);
+  --color-signal-soft: var(--pro-signal-soft, #e8a57c);
+  /* Button fill: the accent darkened until white text clears 4.5:1 (checked by tools/check-hover.mjs). */
+  --color-signal-btn: color-mix(in srgb, var(--color-signal) 86%, black);
+  --color-line: var(--pro-line, #d8cfbd);
+  --color-stone: var(--pro-stone, #6b6659);
+  --font-display: var(--pro-font-display, Georgia), Georgia, 'Times New Roman', serif;
+  --font-body: var(--pro-font-body, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+  --shadow-lift: 0 24px 60px -24px rgb(12 26 32 / 0.35);
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10; }
+  .eyebrow { @apply font-body text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-signal; }
+  .micro { @apply font-body text-[0.625rem] font-medium uppercase tracking-[0.18em]; }
+  .pbtn { @apply inline-flex items-center justify-center gap-2 bg-signal-btn px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300; }
+  .pbtn-outline { @apply inline-flex items-center justify-center gap-2 border border-current px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-300; }
+  .pbtn-light { @apply inline-flex items-center justify-center gap-2 border border-white/60 px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300; }
+  .nav-link { @apply font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:text-signal; }
+  .h-display { @apply font-display font-normal leading-[1.02] tracking-[-0.015em]; }
+}
+
+/* ---- Motion (Webbeo visual layer). All of it is off under prefers-reduced-motion. ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pro-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes pro-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 11%, 0); } }
+  @keyframes pro-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes pro-zoom { from { scale: 1.12; } to { scale: 1; } } /* `scale` is separate from `transform`, so it composes with the parallax drift */
+
+  /* Hero entrance: children rise in sequence on load. */
+  .hero-in > * { animation: pro-rise 0.95s var(--ease-brand) both; }
+  .hero-in > :nth-child(2) { animation-delay: 0.12s; }
+  .hero-in > :nth-child(3) { animation-delay: 0.24s; }
+  .hero-in > :nth-child(4) { animation-delay: 0.36s; }
+  .hero-stats { animation: pro-rise 0.95s var(--ease-brand) 0.5s both; }
+  .hero-photo { animation: pro-zoom 2.2s var(--ease-brand) both; }
+
+  /* Progressive enhancement: native scroll-driven animation (no JS). Browsers without
+     support (Firefox today) simply show the static image. */
+  @supports (animation-timeline: scroll()) {
+    .parallax-img { animation: pro-drift linear both; animation-timeline: scroll(root block); animation-range: 0 100vh; will-change: transform; }
+    .parallax-img.hero-photo { animation: pro-drift linear both, pro-zoom 2.2s var(--ease-brand) both; animation-timeline: scroll(root block), auto; animation-range: 0 100vh, normal; }
+    .accent-rule { transform-origin: left; animation: pro-grow linear both; animation-timeline: view(); animation-range: entry 10% entry 70%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .parallax-img, .hero-photo { transform: none !important; } }
+
+/* Page transitions: Astro View Transitions already crossfade <main>; keep the header still. */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
+
+/* Button hover states. Explicit and high-specificity so a utility like text-ink on the element cannot win,
+   and no hover colour can equal the surface it sits on (copper darkens, outline fills ink, light fills white). */
+a.pbtn:hover, button.pbtn:hover { background-color: color-mix(in srgb, var(--color-signal) 68%, black); color: #fff; }
+a.pbtn-outline:hover, button.pbtn-outline:hover { background-color: var(--color-ink); border-color: var(--color-ink); color: var(--color-surface); }
+a.pbtn-light:hover, button.pbtn-light:hover { background-color: #fff; border-color: #fff; color: var(--color-ink); }

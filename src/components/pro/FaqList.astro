@@ -1,0 +1,12 @@
+---
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+interface Props { eyebrow?: string; title: string; items: { q: string; a: string }[]; }
+const { eyebrow, title, items } = Astro.props;
+---
+<section class="bg-surface py-20 lg:py-28"><div class="container-page grid gap-12 lg:grid-cols-[1fr_1.6fr]">
+  <div><SectionHead {eyebrow} {title} /></div>
+  <div class="divide-y divide-line border-y border-line">
+    {items.map((f) => <details class:list={['group py-6', REVEAL]}><summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-xl text-ink sm:text-2xl">{f.q}<span aria-hidden="true" class="grid h-8 w-8 shrink-0 place-items-center border border-line text-signal transition-transform group-open:rotate-45">+</span></summary><p class="mt-4 max-w-2xl leading-relaxed text-stone">{f.a}</p></details>)}
+  </div>
+</div></section>

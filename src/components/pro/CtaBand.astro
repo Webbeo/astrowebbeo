@@ -1,0 +1,9 @@
+---
+import { emph, tel, REVEAL } from '~/utils/pro';
+interface Props { title: string; text?: string; primary: { text: string; href: string }; phone?: string; }
+const { title, text, primary, phone } = Astro.props;
+---
+<section class="bg-signal-btn text-white"><div class="container-page flex flex-col items-start justify-between gap-8 py-16 lg:flex-row lg:items-center lg:py-20">
+  <div class:list={['max-w-2xl', REVEAL]}><h2 class="h-display text-4xl sm:text-5xl" set:html={emph(title).replace(/text-signal/g, 'text-ink')} />{text && <p class="mt-4 text-white/85">{text}</p>}</div>
+  <div class:list={['flex flex-wrap gap-3', REVEAL]}><a href={primary.href} class="inline-flex items-center justify-center gap-2 bg-ink px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-ink-deep">{primary.text}</a>{phone && <a href={tel(phone)} class="pbtn-light">{phone}</a>}</div>
+</div></section>

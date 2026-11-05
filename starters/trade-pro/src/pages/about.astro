@@ -1,0 +1,17 @@
+---
+import Layout from '~/layouts/ProLayout.astro';
+import PageHero from '~/components/pro/PageHero.astro';
+import SplitFeature from '~/components/pro/SplitFeature.astro';
+import ReviewBand from '~/components/pro/ReviewBand.astro';
+import CtaBand from '~/components/pro/CtaBand.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+const metadata = { title: 'About', description: c.about.intro };
+const s = c.about.story;
+---
+<Layout metadata={metadata}>
+  <PageHero eyebrow="About us" title={c.about.title} intro={c.about.intro} />
+  <SplitFeature eyebrow={s.eyebrow} title={s.title} paragraphs={s.paragraphs} image={s.image} imageAlt={s.imageAlt} points={s.points} flip />
+  <ReviewBand eyebrow="Kind words" title="What customers say" reviews={c.reviews} />
+  <CtaBand title={c.cta.title} text={c.cta.text} primary={{ text: 'Get a quote', href: getPermalink('/contact') }} phone={c.business.phone} />
+</Layout>

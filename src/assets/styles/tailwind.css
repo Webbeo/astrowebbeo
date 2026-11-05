@@ -5,6 +5,9 @@
 /* shadcn/ui-compatible tokens derived from the --aw-* variables. */
 @import './shadcn.css';
 
+/* Webbeo visual layer tokens + component classes (trade-pro starter). */
+@import './pro.css';
+
 @variant dark (&:where(.dark, .dark *));
 
 @custom-variant intersect (&:not([no-intersect]));

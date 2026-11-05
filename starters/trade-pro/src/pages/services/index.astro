@@ -1,0 +1,14 @@
+---
+import Layout from '~/layouts/ProLayout.astro';
+import PageHero from '~/components/pro/PageHero.astro';
+import ServiceCards from '~/components/pro/ServiceCards.astro';
+import CtaBand from '~/components/pro/CtaBand.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+const metadata = { title: 'Services', description: c.servicesSection.intro };
+---
+<Layout metadata={metadata}>
+  <PageHero eyebrow="Services" title={c.servicesSection.title} intro={c.servicesSection.intro} />
+  <ServiceCards title="Everything under one roof" items={c.services.map((s) => ({ title: s.title, summary: s.summary, image: s.image, href: getPermalink(`/services/${s.slug}`) }))} />
+  <CtaBand title={c.cta.title} text={c.cta.text} primary={{ text: 'Get a quote', href: getPermalink('/contact') }} phone={c.business.phone} />
+</Layout>

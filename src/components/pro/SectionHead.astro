@@ -1,0 +1,13 @@
+---
+import { emph, REVEAL_NOQ } from '~/utils/pro';
+interface Props { eyebrow?: string; title: string; intro?: string; href?: string; cta?: string; dark?: boolean; }
+const { eyebrow, title, intro, href, cta, dark = false } = Astro.props;
+---
+<div class:list={['flex flex-col gap-6 md:flex-row md:items-end md:justify-between', REVEAL_NOQ]}>
+  <div class="max-w-2xl">
+    {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+    <h2 class:list={['h-display text-4xl sm:text-5xl lg:text-[3.4rem]', dark ? 'text-white' : 'text-ink']} set:html={emph(title)} />
+    {intro && <p class:list={['mt-5 text-base leading-relaxed sm:text-lg', dark ? 'text-white/70' : 'text-stone']}>{intro}</p>}
+  </div>
+  {href && cta && <a href={href} class:list={['micro inline-flex items-center gap-2 border-b pb-1 transition-colors hover:text-signal', dark ? 'border-white/40 text-white' : 'border-ink/40 text-ink']}>{cta} <span aria-hidden="true">→</span></a>}
+</div>

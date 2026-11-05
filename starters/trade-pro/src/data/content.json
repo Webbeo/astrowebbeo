@@ -1,0 +1,310 @@
+{
+  "business": {
+    "name": "[PLACEHOLDER business name]",
+    "mark": "tabler:droplet",
+    "sub": "[PLACEHOLDER descriptor]",
+    "strap": "[PLACEHOLDER town and areas]",
+    "phone": "[PLACEHOLDER phone]",
+    "email": "[PLACEHOLDER email]",
+    "town": "[PLACEHOLDER town]",
+    "address": [
+      "[PLACEHOLDER address line]",
+      "[PLACEHOLDER town, county]",
+      "[PLACEHOLDER postcode]"
+    ],
+    "hours": "[PLACEHOLDER opening hours]",
+    "footerBlurb": "[PLACEHOLDER one-sentence footer blurb]",
+    "ctaText": "Get a quote",
+    "description": "[PLACEHOLDER site description]"
+  },
+  "hero": {
+    "eyebrow": "[PLACEHOLDER town \u00b7 area]",
+    "title": "[PLACEHOLDER hero headline with *accent* word]",
+    "subtitle": "[PLACEHOLDER hero subtitle]",
+    "image": "hero.jpg",
+    "imageAlt": "[PLACEHOLDER hero image description]",
+    "stats": [
+      {
+        "value": "[PLACEHOLDER n]",
+        "label": "[PLACEHOLDER label]"
+      },
+      {
+        "value": "[PLACEHOLDER n]",
+        "label": "[PLACEHOLDER label]"
+      },
+      {
+        "value": "[PLACEHOLDER n]",
+        "label": "[PLACEHOLDER label]"
+      }
+    ]
+  },
+  "ticker": [
+    "[PLACEHOLDER service]",
+    "[PLACEHOLDER service]",
+    "[PLACEHOLDER service]",
+    "[PLACEHOLDER service]",
+    "[PLACEHOLDER service]",
+    "[PLACEHOLDER service]"
+  ],
+  "intro": {
+    "eyebrow": "[PLACEHOLDER eyebrow]",
+    "title": "[PLACEHOLDER headline with *accent*]",
+    "paragraphs": [
+      "[PLACEHOLDER paragraph]",
+      "[PLACEHOLDER paragraph]"
+    ],
+    "image": "intro.jpg",
+    "imageAlt": "[PLACEHOLDER image description]",
+    "points": [
+      {
+        "title": "[PLACEHOLDER strength]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER strength]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER strength]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER strength]",
+        "text": "[PLACEHOLDER detail]"
+      }
+    ],
+    "ctaText": "About us"
+  },
+  "services": [
+    {
+      "slug": "service-1",
+      "title": "[PLACEHOLDER service 1]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-1.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    },
+    {
+      "slug": "service-2",
+      "title": "[PLACEHOLDER service 2]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-2.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    },
+    {
+      "slug": "service-3",
+      "title": "[PLACEHOLDER service 3]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-3.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    },
+    {
+      "slug": "service-4",
+      "title": "[PLACEHOLDER service 4]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-4.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    },
+    {
+      "slug": "service-5",
+      "title": "[PLACEHOLDER service 5]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-5.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    },
+    {
+      "slug": "service-6",
+      "title": "[PLACEHOLDER service 6]",
+      "summary": "[PLACEHOLDER one-line summary]",
+      "image": "service-6.jpg",
+      "intro": "[PLACEHOLDER service intro]",
+      "body": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "points": [
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]",
+        "[PLACEHOLDER point]"
+      ]
+    }
+  ],
+  "servicesSection": {
+    "eyebrow": "What we do",
+    "title": "[PLACEHOLDER headline with *accent*]",
+    "intro": "[PLACEHOLDER intro]"
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "[PLACEHOLDER headline]",
+    "intro": "[PLACEHOLDER intro]",
+    "steps": [
+      {
+        "title": "[PLACEHOLDER step]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER step]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER step]",
+        "text": "[PLACEHOLDER detail]"
+      },
+      {
+        "title": "[PLACEHOLDER step]",
+        "text": "[PLACEHOLDER detail]"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "quote": "[PLACEHOLDER review text]",
+      "name": "[PLACEHOLDER customer]",
+      "place": "[PLACEHOLDER town]"
+    },
+    {
+      "quote": "[PLACEHOLDER review text]",
+      "name": "[PLACEHOLDER customer]",
+      "place": "[PLACEHOLDER town]"
+    },
+    {
+      "quote": "[PLACEHOLDER review text]",
+      "name": "[PLACEHOLDER customer]",
+      "place": "[PLACEHOLDER town]"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "[PLACEHOLDER question]",
+      "a": "[PLACEHOLDER answer]"
+    },
+    {
+      "q": "[PLACEHOLDER question]",
+      "a": "[PLACEHOLDER answer]"
+    },
+    {
+      "q": "[PLACEHOLDER question]",
+      "a": "[PLACEHOLDER answer]"
+    },
+    {
+      "q": "[PLACEHOLDER question]",
+      "a": "[PLACEHOLDER answer]"
+    }
+  ],
+  "cta": {
+    "title": "[PLACEHOLDER closing headline with *accent*]",
+    "text": "[PLACEHOLDER supporting line]"
+  },
+  "about": {
+    "title": "[PLACEHOLDER about headline with *accent*]",
+    "intro": "[PLACEHOLDER intro]",
+    "story": {
+      "eyebrow": "Our story",
+      "title": "[PLACEHOLDER headline]",
+      "paragraphs": [
+        "[PLACEHOLDER paragraph]",
+        "[PLACEHOLDER paragraph]"
+      ],
+      "image": "about.jpg",
+      "imageAlt": "[PLACEHOLDER image description]",
+      "points": [
+        {
+          "title": "[PLACEHOLDER value]",
+          "text": "[PLACEHOLDER detail]"
+        },
+        {
+          "title": "[PLACEHOLDER value]",
+          "text": "[PLACEHOLDER detail]"
+        },
+        {
+          "title": "[PLACEHOLDER value]",
+          "text": "[PLACEHOLDER detail]"
+        },
+        {
+          "title": "[PLACEHOLDER value]",
+          "text": "[PLACEHOLDER detail]"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "[PLACEHOLDER contact headline with *accent*]",
+    "intro": "[PLACEHOLDER intro]",
+    "notes": [
+      "[PLACEHOLDER note]"
+    ]
+  },
+  "trust": [
+    {
+      "icon": "tabler:shield-check",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:flame",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:calendar-check",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:receipt",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    }
+  ]
+}

@@ -28,8 +28,25 @@ Full widget props: `.agents/skills/use-widgets.md` (AstroWind catalogue, all 30+
 
 Any overlay file replaces the engine file at the same path.
 
+## Visual layer (`src/components/pro`, `src/layouts/ProLayout.astro`, `src/assets/styles/pro.css`)
+Used by the `trade-pro` starter. Palette/fonts come from the site's `CustomStyles.astro` (`--pro-*`). Every photo slot is a file name in `src/assets/images`; a missing file fails `check-build`.
+| Part | Use | Props |
+|---|---|---|
+| `ProLayout` | Shell: demo banner, ProHeader, ProFooter, built from `content.json` | `metadata` |
+| `PhotoHero` | Full-bleed photo hero, `*accent*` word in title, stats | `title`, `subtitle`, `image`, `focal?`, `primary`, `secondary?`, `stats?` |
+| `TrustRow` | 4 icon trust points under hero | `items[{icon,title,text}]` |
+| `ServiceCards` | Image cards; `layout="feature"` = 2 large + rest small | `title`, `items[{title,summary,image,href}]`, `layout?` |
+| `SplitFeature` | Photo + text + points | `title`, `paragraphs`, `image`, `focal?`, `points?`, `flip?` |
+| `ProcessBand` | Dark numbered steps band | `title`, `steps[{title,text}]` |
+| `ReviewBand` | Lead dark quote + smaller cards | `title`, `reviews[{quote,name,place}]` |
+| `FaqList` / `CtaBand` / `PageHero` / `SectionHead` / `TickerStrip` | Supporting sections | see source |
+| `ProImage` | Local image by file name, webp, lazy; sand block if missing | `src`, `alt`, `focal?`, `eager?` |
+Rules: 2-3 `*accent*` words per site; own palette + font pair per demo (fonts: Fraunces, DM Serif Display, Instrument Serif, DM Sans, Manrope, Barlow Condensed); real photography for every slot; button classes are `pbtn*` (not `btn-primary`, which is AstroWind's).
+Overlay pages are copied from the starter at `new-demo` time; later starter edits do not reach existing overlays.
+Motion: scroll reveals use AstroWind's `<Intersect/>` via `REVEAL`/`REVEAL_NOQ` (`~/utils/pro`); hero parallax/entrance are CSS-only (`.parallax-img`, `.hero-in`, `.accent-rule` in `pro.css`, scroll-driven animation, static fallback); page changes use Astro View Transitions (`ProLayout` fades `<main>`, `ProHeader` is persisted). All gated by `prefers-reduced-motion`.
+
 ## Commands (run from the engine checkout)
-- `node tools/new-demo.mjs <slug> [--starter local-trade]` creates the overlay.
+- `node tools/new-demo.mjs <slug> [--starter trade-pro|local-trade]` (use trade-pro) creates the overlay.
 - `node tools/build-demo.mjs <slug>` builds the demo at `/<slug>` into `out/<slug>/dist`.
 - `node tools/build-demo.mjs <slug> --live --site https://<domain>` builds for `/` into `out/<slug>/dist-live`.
 - Both run `tools/check-build.mjs`. A failed check writes no dist.
@@ -44,3 +61,5 @@ live has none of those and no slug / `try.webbeo.ai`. Live also fails on any `[P
 - Library additions are new files; edit upstream AstroWind files minimally (syncs stay cheap).
 - A part enters the library only after a real build used it, with client info removed and placeholders in.
 - Live builds refuse a dirty engine checkout. Demos pin the engine sha in `site.json`.
+
+Checks: `tools/check-hover.mjs` (run by build-demo) forces :hover on every button on every page and fails on contrast <4.5:1 or a vanishing button. Buttons use `--color-signal-btn`; hover rules live in `pro.css` as `a.pbtn:hover` (not utilities).

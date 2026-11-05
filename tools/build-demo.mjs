@@ -88,6 +88,16 @@ const dist = path.join(build, 'dist');
 const res = checkBuild({ dist, mode: live ? 'live' : 'demo', slug, site, ghlFormId: cfg.ghlFormId, forbid: cfg.forbid || [] });
 res.warnings.forEach((w) => console.log(`WARN  ${w}`));
 res.errors.forEach((e) => console.log(`FAIL  ${e}`));
+// 5b. visual checks (demo builds): forced :hover + contrast on every button, real Chromium. Fail closed.
+if (!live && !res.errors.length) {
+  const n0 = res.errors.length;
+  const hv = spawnSync('node', [path.join(path.dirname(fileURLToPath(import.meta.url)), 'check-hover.mjs'), slug, dist], { encoding: 'utf8', timeout: 180000 });
+  const lines = (hv.stdout || '').split('\n').filter((l) => l.startsWith('FAIL '));
+  if (hv.status === 0) console.log('check-hover: PASS');
+  else if (hv.status === 1) { [...new Set(lines)].slice(0, 12).forEach((l) => res.errors.push(l.slice(5))); if (lines.length > 12) res.errors.push(`check-hover: ...and ${lines.length - 12} more`); }
+  else res.errors.push('check-hover could not run (needs chromium + node>=22): ' + ((hv.stderr || '').trim().split('\n').pop() || 'unknown error'));
+  res.errors.slice(n0).forEach((e) => console.log(`FAIL  ${e}`));
+}
 const target = path.join(outDir, live ? 'dist-live' : 'dist');
 fs.rmSync(target, { recursive: true, force: true });   // a failed build must never leave a deployable dist behind
 if (res.errors.length) { console.log(`RESULT: FAIL (${res.errors.length}) - nothing written to ${target}; build dir kept: ${build}`); process.exit(1); }

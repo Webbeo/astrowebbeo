@@ -1,0 +1,14 @@
+---
+import { Icon } from 'astro-icon/components';
+interface Props { items: { icon: string; title: string; text: string }[]; }
+import { REVEAL } from '~/utils/pro';
+const { items } = Astro.props;
+---
+<section class="border-b border-line bg-surface"><div class="container-page grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+  {items.map((t) => (
+    <div class:list={['flex items-start gap-4 bg-surface px-1 py-7 sm:px-6', REVEAL]}>
+      <span class="grid h-11 w-11 shrink-0 place-items-center border border-line text-signal"><Icon name={t.icon} class="h-5 w-5" /></span>
+      <div><p class="font-display text-lg leading-tight text-ink">{t.title}</p><p class="mt-1 text-[0.82rem] leading-snug text-stone">{t.text}</p></div>
+    </div>
+  ))}
+</div></section>
