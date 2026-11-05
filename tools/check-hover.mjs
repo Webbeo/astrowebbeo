@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // check-hover: force :hover on every button-like link on every built page (real Chromium via CDP)
 // and fail if text contrast < 4.5:1 or the button's fill vanishes into what it sits on.
+// Also scans all visible text at rest for contrast against its solid background (text over photos is skipped).
 // Usage: node tools/check-hover.mjs <slug> [distDir]   (default out/<slug>/dist, served under /<slug>/; demo builds only)
 import { spawn } from 'node:child_process';
 import http from 'node:http';
@@ -69,11 +70,41 @@ const ratio = (x, y) => { const [a, b] = [lum(x), lum(y)].sort((p, q) => q - p);
 const pages = []; const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const f = path.join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name === 'index.html') pages.push(path.relative(root, path.dirname(f))); } };
 walk(root);
 
+
+const SCAN = `(()=>{
+const cv=document.createElement('canvas');cv.width=cv.height=1;const cx=cv.getContext('2d',{willReadFrequently:true});
+const rgba=(c)=>{cx.clearRect(0,0,1,1);cx.fillStyle='#000';cx.fillStyle=c;cx.fillRect(0,0,1,1);const d=cx.getImageData(0,0,1,1).data;return [d[0],d[1],d[2],d[3]/255]};
+const over=(f,b)=>[0,1,2].map(i=>f[i]*f[3]+b[i]*(1-f[3])).concat(1);
+const lum=(c)=>{const v=[c[0],c[1],c[2]].map(x=>{x/=255;return x<=0.03928?x/12.92:((x+0.055)/1.055)**2.4});return .2126*v[0]+.7152*v[1]+.0722*v[2]};
+const ratio=(a,b)=>{const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+.05)/(y+.05)};
+const covers=[...document.querySelectorAll('img,video')].filter(i=>{const p=getComputedStyle(i).position;return p==='absolute'||p==='fixed'}).map(i=>i.getBoundingClientRect());
+const bgOf=(el)=>{const L=[];for(let e=el;e;e=e.parentElement){const s=getComputedStyle(e);if(s.backgroundImage&&s.backgroundImage!=='none')return null;const c=rgba(s.backgroundColor);if(c[3]>0){L.push(c);if(c[3]>=0.995)break}}let b=[255,255,255,1];for(let i=L.length-1;i>=0;i--)b=over(L[i],b);return b};
+const seen=new Set(),out=[];
+for(const el of document.body.querySelectorAll('*')){
+  if(['SCRIPT','STYLE','NOSCRIPT','svg','path'].includes(el.tagName)) continue;
+  const own=[...el.childNodes].filter(n=>n.nodeType===3&&n.textContent.trim()).map(n=>n.textContent.trim()).join(' ');
+  if(!own) continue;
+  const s=getComputedStyle(el); if(s.display==='none'||s.visibility==='hidden') continue;
+  const r=el.getBoundingClientRect(); if(r.width<2||r.height<2) continue;
+  const mx=r.left+r.width/2,my=r.top+r.height/2;
+  if(covers.some(c=>mx>=c.left&&mx<=c.right&&my>=c.top&&my<=c.bottom)) continue;
+  const bg=bgOf(el); if(!bg) continue;
+  let fg=rgba(s.color); if(fg[3]<1) fg=over(fg,bg);
+  const size=parseFloat(s.fontSize),w=parseInt(s.fontWeight)||400,need=(size>=24||(size>=18.66&&w>=700))?3:4.5;
+  const rt=ratio(fg,bg); if(rt>=need) continue;
+  const cls=(typeof el.className==='string'?el.className:'').split(' ').slice(0,3).join('.');
+  const key=el.tagName+cls+s.color+bg.join(',');if(seen.has(key)) continue;seen.add(key);
+  out.push({t:own.slice(0,34),cls,r:+rt.toFixed(2),need});
+}
+return out.slice(0,30);})()`;
+
 const fails = []; let checked = 0;
 for (const pg of pages.sort()) {
   const url = base + (pg ? pg + '/' : '');
   const l = loaded(); await send('Page.navigate', { url }); await l;
   await send('Runtime.evaluate', { expression: `(()=>{const s=document.createElement('style');s.textContent='*{transition:none!important;animation:none!important;opacity:1!important}';document.head.append(s);})()` });
+  const sc = (await send('Runtime.evaluate', { expression: SCAN, returnByValue: true })).result.value || [];
+  for (const x of sc) fails.push(`${pg || '/'} text "${x.t}" [${x.cls}] rest: text contrast ${x.r}:1 (<${x.need})`);
   const doc = await send('DOM.getDocument', { depth: 0 });
   const { nodeIds } = await send('DOM.querySelectorAll', { nodeId: doc.root.nodeId, selector: SEL });
   for (const nodeId of nodeIds) {

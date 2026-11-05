@@ -7,7 +7,7 @@ const { logoLight, name, blurb, phone, email, address, hours, explore, services,
 <footer class="bg-ink-deep text-white">
   <div class="container-page grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
     <div>
-      {logoLight ? <ProImage src={logoLight} alt={name} class="h-12 w-auto" widths={[320, 640]} sizes="320px" /> : <p class="font-display text-3xl">{name}</p>}
+      {logoLight ? <ProImage src={logoLight} alt={name} class="h-14 w-auto" widths={[320, 640]} sizes="320px" /> : <p class="font-display text-3xl">{name}</p>}
       <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{blurb}</p>
       <a href={cta.href} class="pbtn mt-7">{cta.text}</a>
     </div>
