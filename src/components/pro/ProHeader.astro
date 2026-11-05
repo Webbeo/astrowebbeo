@@ -5,7 +5,7 @@ import { tel } from '~/utils/pro';
 interface Props { name: string; mark?: string; sub?: string; phone: string; strap?: string; links: { text: string; href: string }[]; cta: { text: string; href: string }; }
 const { name, mark, sub, phone, strap, links, cta } = Astro.props;
 ---
-<header class="sticky top-0 z-50">
+<header class="sticky top-0 z-50" transition:name="pro-header" transition:persist>
   <div class="hidden border-b border-white/10 bg-ink-deep text-white md:block">
     <div class="container-page micro flex h-9 items-center justify-between gap-6 text-white/65">
       <p>{strap}</p>
@@ -38,5 +38,6 @@ const { name, mark, sub, phone, strap, links, cta } = Astro.props;
     var b = document.querySelector('[data-nav-toggle]'), p = document.querySelector('[data-nav-panel]');
     if (!b || !p) return;
     b.addEventListener('click', function () { var o = p.hidden; p.hidden = !o; b.setAttribute('aria-expanded', String(o)); });
+    document.addEventListener('astro:after-swap', function () { p.hidden = true; b.setAttribute('aria-expanded', 'false'); });
   })();
 </script>

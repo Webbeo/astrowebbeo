@@ -25,3 +25,31 @@
   .nav-link { @apply font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:text-signal; }
   .h-display { @apply font-display font-normal leading-[1.02] tracking-[-0.015em]; }
 }
+
+/* ---- Motion (Webbeo visual layer). All of it is off under prefers-reduced-motion. ---- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pro-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes pro-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 11%, 0); } }
+  @keyframes pro-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes pro-zoom { from { scale: 1.12; } to { scale: 1; } } /* `scale` is separate from `transform`, so it composes with the parallax drift */
+
+  /* Hero entrance: children rise in sequence on load. */
+  .hero-in > * { animation: pro-rise 0.95s var(--ease-brand) both; }
+  .hero-in > :nth-child(2) { animation-delay: 0.12s; }
+  .hero-in > :nth-child(3) { animation-delay: 0.24s; }
+  .hero-in > :nth-child(4) { animation-delay: 0.36s; }
+  .hero-stats { animation: pro-rise 0.95s var(--ease-brand) 0.5s both; }
+  .hero-photo { animation: pro-zoom 2.2s var(--ease-brand) both; }
+
+  /* Progressive enhancement: native scroll-driven animation (no JS). Browsers without
+     support (Firefox today) simply show the static image. */
+  @supports (animation-timeline: scroll()) {
+    .parallax-img { animation: pro-drift linear both; animation-timeline: scroll(root block); animation-range: 0 100vh; will-change: transform; }
+    .parallax-img.hero-photo { animation: pro-drift linear both, pro-zoom 2.2s var(--ease-brand) both; animation-timeline: scroll(root block), auto; animation-range: 0 100vh, normal; }
+    .accent-rule { transform-origin: left; animation: pro-grow linear both; animation-timeline: view(); animation-range: entry 10% entry 70%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .parallax-img, .hero-photo { transform: none !important; } }
+
+/* Page transitions: Astro View Transitions already crossfade <main>; keep the header still. */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }

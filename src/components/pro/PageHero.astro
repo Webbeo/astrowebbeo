@@ -3,7 +3,7 @@ import { emph } from '~/utils/pro';
 interface Props { eyebrow?: string; title: string; intro?: string; }
 const { eyebrow, title, intro } = Astro.props;
 ---
-<section class="bg-ink text-white"><div class="container-page py-20 lg:py-28">
+<section class="bg-ink text-white"><div class="hero-in container-page py-20 lg:py-28">
   {eyebrow && <p class="eyebrow mb-5 text-signal-soft">{eyebrow}</p>}
   <h1 class="h-display max-w-4xl text-5xl sm:text-6xl lg:text-7xl" set:html={emph(title).replace(/text-signal/g, 'text-signal-soft')} />
   {intro && <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">{intro}</p>}
