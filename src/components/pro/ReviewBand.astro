@@ -1,17 +1,25 @@
 ---
 import SectionHead from './SectionHead.astro';
+// First review is the lead quote (large, dark panel); the rest sit beside it.
 interface Props { eyebrow?: string; title: string; reviews: { quote: string; name: string; place: string }[]; }
 const { eyebrow, title, reviews } = Astro.props;
+const [lead, ...rest] = reviews;
 ---
 <section class="bg-surface-2 py-20 lg:py-28"><div class="container-page">
   <SectionHead {eyebrow} {title} />
-  <div class="mt-12 grid gap-6 lg:grid-cols-3">
-    {reviews.map((r) => (
-      <figure class="flex flex-col bg-surface p-8 shadow-[0_1px_0_var(--color-line)]">
-        <p class="font-display text-5xl leading-none text-signal" aria-hidden="true">“</p>
-        <blockquote class="font-display -mt-2 flex-1 text-xl leading-snug text-ink">{r.quote}</blockquote>
-        <figcaption class="micro mt-8 border-t border-line pt-5 text-ink">{r.name}<span class="block text-stone">{r.place}</span></figcaption>
-      </figure>
-    ))}
+  <div class="mt-12 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+    <figure class="flex flex-col justify-between bg-ink p-8 text-white sm:p-12">
+      <p class="font-display text-7xl leading-none text-signal-soft" aria-hidden="true">“</p>
+      <blockquote class="font-display -mt-4 text-2xl leading-snug sm:text-[2rem]">{lead.quote}</blockquote>
+      <figcaption class="micro mt-10 border-t border-white/15 pt-5">{lead.name}<span class="block text-white/55">{lead.place}</span></figcaption>
+    </figure>
+    <div class="grid gap-6">
+      {rest.map((r) => (
+        <figure class="bg-surface p-7 shadow-[0_1px_0_var(--color-line)]">
+          <blockquote class="font-display text-lg leading-snug text-ink">{r.quote}</blockquote>
+          <figcaption class="micro mt-5 border-t border-line pt-4 text-ink">{r.name} <span class="text-stone">· {r.place}</span></figcaption>
+        </figure>
+      ))}
+    </div>
   </div>
 </div></section>

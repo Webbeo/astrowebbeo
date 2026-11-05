@@ -284,5 +284,27 @@
     "notes": [
       "[PLACEHOLDER note]"
     ]
-  }
+  },
+  "trust": [
+    {
+      "icon": "tabler:shield-check",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:flame",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:calendar-check",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    },
+    {
+      "icon": "tabler:receipt",
+      "title": "[PLACEHOLDER trust point]",
+      "text": "[PLACEHOLDER detail - confirm accreditations with the client]"
+    }
+  ]
 }
