@@ -2,7 +2,6 @@
 import Layout from '~/layouts/ProLayout.astro';
 import PhotoHero from '~/components/pro/PhotoHero.astro';
 import TrustRow from '~/components/pro/TrustRow.astro';
-import TickerStrip from '~/components/pro/TickerStrip.astro';
 import ServiceCards from '~/components/pro/ServiceCards.astro';
 import SplitFeature from '~/components/pro/SplitFeature.astro';
 import ProcessBand from '~/components/pro/ProcessBand.astro';
@@ -20,7 +19,6 @@ const metadata = { title: c.hero.title.replace(/\*/g, ''), description: b.descri
   <PhotoHero eyebrow={c.hero.eyebrow} title={c.hero.title} subtitle={c.hero.subtitle} image={c.hero.image} imageAlt={c.hero.imageAlt} focal={c.hero.focal}
     primary={{ text: b.ctaText ?? 'Get a quote', href: getPermalink('/contact') }} secondary={{ text: 'Our services', href: getPermalink('/services') }} stats={c.hero.stats} />
   <TrustRow items={c.trust} />
-  <TickerStrip items={c.ticker} />
   <SplitFeature eyebrow={c.intro.eyebrow} title={c.intro.title} paragraphs={c.intro.paragraphs} image={c.intro.image} imageAlt={c.intro.imageAlt}
     points={c.intro.points} href={getPermalink('/about')} cta={c.intro.ctaText} />
   <ServiceCards {...c.servicesSection} layout="feature" href={getPermalink('/services')} cta="All services"
