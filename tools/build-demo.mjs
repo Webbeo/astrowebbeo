@@ -85,7 +85,7 @@ if (r.status !== 0) { console.error((r.stdout + r.stderr).split('\n').slice(-25)
 
 // 5. checks gate the output
 const dist = path.join(build, 'dist');
-const res = checkBuild({ dist, mode: live ? 'live' : 'demo', slug, site, ghlFormId: cfg.ghlFormId, forbid: cfg.forbid || [] });
+const res = checkBuild({ dist, mode: live ? 'live' : 'demo', slug, site, ghlFormId: cfg.ghlFormId, noForm: !!cfg.noForm, forbid: cfg.forbid || [] });
 res.warnings.forEach((w) => console.log(`WARN  ${w}`));
 res.errors.forEach((e) => console.log(`FAIL  ${e}`));
 // 5b. visual checks (demo builds): forced :hover + contrast on every button, real Chromium. Fail closed.

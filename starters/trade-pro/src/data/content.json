@@ -2,6 +2,8 @@
   "business": {
     "name": "[PLACEHOLDER business name]",
     "mark": "tabler:droplet",
+    "logo": "",
+    "logoLight": "",
     "sub": "[PLACEHOLDER descriptor]",
     "strap": "[PLACEHOLDER town and areas]",
     "phone": "[PLACEHOLDER phone]",
