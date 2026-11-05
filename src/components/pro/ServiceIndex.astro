@@ -1,0 +1,25 @@
+---
+import ProImage from './ProImage.astro';
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+// Editorial service list: numbered rows, big display titles, summary beside, arrow; on desktop hover a photo
+// thumbnail slides in. Compact way to show 6+ services without a card grid.
+interface Props { eyebrow?: string; title: string; intro?: string; href?: string; cta?: string; items: { title: string; summary: string; image: string; href: string }[]; }
+const { eyebrow, title, intro, href, cta, items } = Astro.props;
+---
+<section class="bg-surface py-20 lg:py-28"><div class="container-page">
+  <SectionHead {eyebrow} {title} {intro} {href} {cta} />
+  <ul class="mt-12 border-b border-line">
+    {items.map((s, i) => (
+      <li class={REVEAL}>
+        <a href={s.href} class="group relative grid items-center gap-x-8 gap-y-2 border-t border-line px-1 py-7 transition-colors hover:bg-surface-2 sm:px-4 lg:grid-cols-[3.5rem_1.1fr_1.2fr_2.5rem] lg:py-9">
+          <span class="micro text-signal">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="h-display text-2xl text-ink transition-colors group-hover:text-signal sm:text-3xl">{s.title}</h3>
+          <p class="max-w-md text-[0.95rem] leading-relaxed text-stone lg:pr-24">{s.summary}</p>
+          <span aria-hidden="true" class="hidden text-xl text-signal transition-transform group-hover:translate-x-1 lg:block">→</span>
+          <ProImage src={s.image} alt="" sizes="180px" widths={[240, 480]} class="pointer-events-none absolute right-16 top-1/2 hidden h-20 w-32 -translate-y-1/2 scale-95 object-cover opacity-0 transition duration-500 ease-brand group-hover:scale-100 group-hover:opacity-100 lg:block" />
+        </a>
+      </li>
+    ))}
+  </ul>
+</div></section>

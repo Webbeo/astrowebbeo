@@ -1,0 +1,18 @@
+---
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+// Equal-weight review cards in a staggered row (middle card dropped on desktop). Alternative to ReviewBand's lead quote.
+interface Props { eyebrow?: string; title: string; reviews: { quote: string; name: string; place: string }[]; }
+const { eyebrow, title, reviews } = Astro.props;
+---
+<section class="bg-surface py-20 lg:py-28"><div class="container-page">
+  <SectionHead {eyebrow} {title} />
+  <div class="mt-12 grid gap-6 lg:grid-cols-3">
+    {reviews.map((r, i) => (
+      <figure class:list={['flex flex-col justify-between border-t-4 border-signal bg-surface-2 p-7 sm:p-8', i === 1 && 'lg:mt-10', REVEAL]}>
+        <blockquote class="font-display text-xl leading-snug text-ink">{r.quote}</blockquote>
+        <figcaption class="micro mt-8 border-t border-line pt-4 text-ink">{r.name} <span class="text-stone">· {r.place}</span></figcaption>
+      </figure>
+    ))}
+  </div>
+</div></section>

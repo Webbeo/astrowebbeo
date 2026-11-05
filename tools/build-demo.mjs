@@ -98,6 +98,13 @@ if (!live && !res.errors.length) {
   else res.errors.push('check-hover could not run (needs chromium + node>=22): ' + ((hv.stderr || '').trim().split('\n').pop() || 'unknown error'));
   res.errors.slice(n0).forEach((e) => console.log(`FAIL  ${e}`));
 }
+// 5c. layout variety (demo builds): the home page must not share a skeleton with another demo. Override only with --allow-similar-layout.
+if (!live && !res.errors.length && !flag('--allow-similar-layout')) {
+  const ld = spawnSync('node', [path.join(path.dirname(fileURLToPath(import.meta.url)), 'layout-diff.mjs'), slug], { encoding: 'utf8' });
+  if (ld.status === 0) console.log('layout-diff: PASS');
+  else if (ld.status === 1) { const l = (ld.stdout || '').split('\n').filter((x) => x.startsWith('FAIL')); l.forEach((x) => res.errors.push(x.slice(5))); res.errors.push('layout-diff: pick different hero/services/process/review parts, or pass --allow-similar-layout if intentional'); res.errors.slice(-l.length - 1).forEach((e) => console.log(`FAIL  ${e}`)); }
+  else res.errors.push('layout-diff could not run: ' + ((ld.stderr || '').trim().split('\n').pop() || 'unknown error'));
+}
 const target = path.join(outDir, live ? 'dist-live' : 'dist');
 fs.rmSync(target, { recursive: true, force: true });   // a failed build must never leave a deployable dist behind
 if (res.errors.length) { console.log(`RESULT: FAIL (${res.errors.length}) - nothing written to ${target}; build dir kept: ${build}`); process.exit(1); }

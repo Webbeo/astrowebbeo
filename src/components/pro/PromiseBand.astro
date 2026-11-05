@@ -1,0 +1,25 @@
+---
+import ProImage from './ProImage.astro';
+import { emph, REVEAL } from '~/utils/pro';
+// Guarantee / accreditation band: accent block with the badge on a white card and one big figure,
+// beside a tinted panel with the numbered promises. Use when the firm has a formal scheme to explain.
+interface Props { eyebrow?: string; title: string; intro?: string; badge: string; figure: { value: string; label: string }; points: { title: string; text: string }[]; href?: string; cta?: string; }
+const { eyebrow, title, intro, badge, figure, points, href, cta } = Astro.props;
+---
+<section class="bg-surface pb-20 lg:pb-28"><div class="container-page">
+  <div class="grid overflow-hidden lg:grid-cols-[0.78fr_1.22fr]">
+    <div class:list={['flex flex-col justify-between gap-12 bg-signal-btn p-8 text-white sm:p-12', REVEAL]}>
+      <div class="w-fit bg-white p-5"><ProImage src={badge} alt="" sizes="260px" widths={[320, 640]} class="h-20 w-auto sm:h-24" /></div>
+      <div><p class="h-display text-6xl sm:text-7xl">{figure.value}</p><p class="micro mt-3 text-white">{figure.label}</p></div>
+    </div>
+    <div class:list={['bg-surface-2 p-8 sm:p-12', REVEAL]}>
+      {eyebrow && <p class="eyebrow mb-4">{eyebrow}</p>}
+      <h2 class="h-display text-4xl text-ink sm:text-5xl" set:html={emph(title)} />
+      {intro && <p class="mt-5 max-w-xl leading-relaxed text-stone">{intro}</p>}
+      <ol class="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+        {points.map((p, i) => <li class="border-t border-line pt-5"><p class="micro text-signal">{String(i + 1).padStart(2, '0')}</p><p class="mt-2 font-display text-xl text-ink">{p.title}</p><p class="mt-1.5 text-sm leading-relaxed text-stone">{p.text}</p></li>)}
+      </ol>
+      {href && cta && <a href={href} class="pbtn-outline mt-10 text-ink">{cta}</a>}
+    </div>
+  </div>
+</div></section>

@@ -1,0 +1,29 @@
+---
+import ProImage from './ProImage.astro';
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+// Audience routing: one tall photo panel per customer type. Desktop = expanding accordion (first open, hover/focus
+// opens another); mobile = stacked, all open. Each panel is one link, so it works by keyboard and touch.
+interface Props { eyebrow?: string; title: string; intro?: string; sectors: { title: string; text: string; bullets: string[]; image: string; href: string; focal?: string }[]; }
+const { eyebrow, title, intro, sectors } = Astro.props;
+---
+<section class="bg-surface py-20 lg:py-28"><div class="container-page">
+  <SectionHead {eyebrow} {title} {intro} />
+  <div class="panels mt-14">
+    {sectors.map((s, i) => (
+      <a href={s.href} class:list={['panel group relative isolate block overflow-hidden bg-ink-deep text-white', REVEAL]}>
+        <ProImage src={s.image} alt="" focal={s.focal} sizes="(min-width:1024px) 520px, 100vw" class="absolute inset-0 -z-10 h-full w-full object-cover transition-transform duration-[1400ms] ease-brand group-hover:scale-105" />
+        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-deep via-ink-deep/65 to-ink-deep/10"></div>
+        <div class="flex h-full min-h-[24rem] flex-col justify-end p-6 lg:min-h-0 lg:p-7">
+          <p class="micro text-signal-soft">{String(i + 1).padStart(2, '0')}</p>
+          <h3 class="h-display mt-2 text-[1.7rem] leading-none">{s.title}</h3>
+          <div class="panel-more">
+            <p class="mt-4 text-sm leading-relaxed text-white/85">{s.text}</p>
+            <ul class="mt-4 space-y-1.5 text-sm text-white/85">{s.bullets.map((b) => <li class="flex gap-2"><span aria-hidden="true" class="text-signal-soft">—</span>{b}</li>)}</ul>
+            <span class="micro mt-5 inline-flex items-center gap-2">Explore <span aria-hidden="true" class="text-signal-soft transition-transform group-hover:translate-x-1">→</span></span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</div></section>

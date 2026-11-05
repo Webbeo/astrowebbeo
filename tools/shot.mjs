@@ -16,7 +16,7 @@ if (!url || !out) { console.error('usage: shot.mjs <url> <out.png> [--w 1440] [-
 const port = 9800 + Math.floor(Math.random() * 400);
 const prof = fs.mkdtempSync(path.join(os.tmpdir(), 'shot-'));
 const chrome = spawn('chromium', ['--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', `--remote-debugging-port=${port}`, `--user-data-dir=${prof}`, 'about:blank'], { stdio: 'ignore' });
-const done = (c) => { try { chrome.kill('SIGKILL'); } catch {} fs.rmSync(prof, { recursive: true, force: true }); process.exit(c); };
+const done = (c) => { try { chrome.kill('SIGKILL'); } catch {} setTimeout(() => { try { fs.rmSync(prof, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 }); } catch {} process.exit(c); }, 400); };
 let tgt;
 for (let i = 0; i < 50 && !tgt; i++) {
   try { tgt = (await (await fetch(`http://127.0.0.1:${port}/json/list`)).json()).find((t) => t.type === 'page'); } catch {}

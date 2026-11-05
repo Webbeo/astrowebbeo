@@ -1,0 +1,21 @@
+---
+import ProImage from './ProImage.astro';
+import SectionHead from './SectionHead.astro';
+import { REVEAL } from '~/utils/pro';
+// Bento gallery of the firm's own work: 4 tiles (tall, wide, square, square). Captions describe what is visible.
+interface Props { eyebrow?: string; title: string; intro?: string; href?: string; cta?: string; items: { image: string; caption: string; tag?: string; focal?: string }[]; }
+const { eyebrow, title, intro, href, cta, items } = Astro.props;
+const span = ['row-span-2', 'col-span-2', '', ''];
+---
+<section class="bg-surface-2 py-20 lg:py-28"><div class="container-page">
+  <SectionHead {eyebrow} {title} {intro} {href} {cta} />
+  <div class="mt-12 grid auto-rows-[190px] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[250px] lg:auto-rows-[290px] lg:grid-cols-3">
+    {items.slice(0, 4).map((p, i) => (
+      <figure class:list={['group relative isolate overflow-hidden bg-ink-deep', span[i], REVEAL]}>
+        <ProImage src={p.image} alt={p.caption} focal={p.focal} sizes="(min-width:1024px) 600px, 50vw" class="h-full w-full object-cover transition-transform duration-[1200ms] ease-brand group-hover:scale-105" />
+        <div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink-deep/95 via-ink-deep/60 to-transparent"></div>
+        <figcaption class="absolute inset-x-0 bottom-0 p-4 text-white sm:p-6">{p.tag && <p class="micro text-white">{p.tag}</p>}<p class="font-display mt-1 text-lg leading-snug sm:text-xl">{p.caption}</p></figcaption>
+      </figure>
+    ))}
+  </div>
+</div></section>

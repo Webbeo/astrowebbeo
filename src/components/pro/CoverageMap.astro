@@ -1,0 +1,20 @@
+---
+import ProImage from './ProImage.astro';
+import { emph, REVEAL } from '~/utils/pro';
+// Where we work: dark band with confirmed facts (base, area, quote terms) beside a map/illustration tile.
+// Only put facts here that the business states itself; never invent a service-area list.
+interface Props { eyebrow?: string; title: string; intro?: string; image: string; imageAlt?: string; facts: { label: string; value: string }[]; href?: string; cta?: string; }
+const { eyebrow, title, intro, image, imageAlt = '', facts, href, cta } = Astro.props;
+---
+<section class="bg-ink-deep py-20 text-white lg:py-28"><div class="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+  <div class={REVEAL}>
+    {eyebrow && <p class="eyebrow mb-4 text-signal-soft">{eyebrow}</p>}
+    <h2 class="h-display text-4xl sm:text-5xl" set:html={emph(title).replace(/text-signal/g, 'text-signal-soft')} />
+    {intro && <p class="mt-5 max-w-lg leading-relaxed text-white/75">{intro}</p>}
+    <dl class="mt-10 border-t border-white/15">{facts.map((f) => <div class="grid grid-cols-[7rem_1fr] gap-4 border-b border-white/15 py-5"><dt class="micro pt-1 text-white/65">{f.label}</dt><dd class="font-display text-xl">{f.value}</dd></div>)}</dl>
+    {href && cta && <a href={href} class="pbtn mt-9">{cta}</a>}
+  </div>
+  <div class:list={['relative aspect-square w-full max-w-[34rem] justify-self-center overflow-hidden border border-white/15 lg:justify-self-end', REVEAL]}>
+    <ProImage src={image} alt={imageAlt} sizes="(min-width:1024px) 540px, 100vw" class="h-full w-full object-cover" />
+  </div>
+</div></section>
