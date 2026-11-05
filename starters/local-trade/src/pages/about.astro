@@ -1,0 +1,19 @@
+---
+import Layout from '~/layouts/TradeLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+
+const metadata = { title: 'About', description: c.business.description };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="About us" title={c.about.title} subtitle={c.about.subtitle} />
+  <Features2 items={c.about.points} columns={3} />
+  <CallToAction
+    title="Talk to us"
+    actions={[{ variant: 'primary', text: 'Contact us', href: getPermalink('/contact') }]}
+  />
+</Layout>

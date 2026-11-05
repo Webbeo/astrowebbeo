@@ -1,0 +1,23 @@
+---
+import Layout from '~/layouts/TradeLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import GhlForm from '~/components/parts/GhlForm.astro';
+import c from '~/data/content.json';
+import site from '~/data/site.json';
+
+const b = c.business;
+const metadata = { title: 'Contact', description: c.contact.subtitle };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Contact" title={c.contact.title} subtitle={c.contact.subtitle} />
+  <section class="mx-auto max-w-3xl px-4 pb-4 text-center text-muted">
+    <p>
+      <a href={`tel:${b.phone}`}>{b.phone}</a> &middot; <a href={`mailto:${b.email}`}>{b.email}</a>
+    </p>
+    <p>{b.hours}</p>
+  </section>
+  <section class="px-4 py-8">
+    <GhlForm formId={site.ghlFormId} />
+  </section>
+</Layout>

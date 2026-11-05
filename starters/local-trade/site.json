@@ -1,0 +1,12 @@
+{
+  "slug": "",
+  "starter": "",
+  "trade": "[PLACEHOLDER trade]",
+  "ghlFormId": "[PLACEHOLDER-FORM-ID]",
+  "forbid": [],
+  "inheritPages": [
+    "404.astro"
+  ],
+  "inheritData": [],
+  "engine": {}
+}
