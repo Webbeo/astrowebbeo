@@ -88,6 +88,12 @@ export function checkBuild({ dist, mode, slug, site, ghlFormId, forbid = [] }) {
   if (noindexMissing.length) errors.push(`demo page(s) without noindex: ${noindexMissing.slice(0, 3).join(', ')}${noindexMissing.length > 3 ? ` +${noindexMissing.length - 3}` : ''}`);
   if (placeholders) (live ? errors : warnings).push(`${placeholders} [PLACEHOLDER] marker(s) still visible`);
 
+  // 2b. visual layer: a photo slot with no file renders a visible placeholder block; never ship one
+  const missingImg = html.filter((f) => read(f).includes('data-missing-image='));
+  if (missingImg.length) {
+    const names = [...new Set(missingImg.flatMap((f) => [...read(f).matchAll(/data-missing-image="([^"]+)"/g)].map((m) => m[1])))];
+    errors.push(`missing image file(s) in src/assets/images: ${names.slice(0, 8).join(', ')}${names.length > 8 ? ` +${names.length - 8}` : ''}`);
+  }
   // 3. shared GHL form
   if (!ghlFormId) errors.push('site.json has no ghlFormId');
   else if (!html.some((f) => read(f).includes(`/widget/form/${ghlFormId}`))) errors.push(`GHL form ${ghlFormId} is not embedded on any page`);

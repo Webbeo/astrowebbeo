@@ -1,11 +1,11 @@
 ---
 import ProImage from './ProImage.astro';
 import { emph, tel } from '~/utils/pro';
-interface Props { eyebrow?: string; title: string; subtitle: string; image: string; imageAlt?: string; primary: { text: string; href: string }; secondary?: { text: string; href: string }; stats?: { value: string; label: string }[]; }
-const { eyebrow, title, subtitle, image, imageAlt = '', primary, secondary, stats = [] } = Astro.props;
+interface Props { focal?: string; eyebrow?: string; title: string; subtitle: string; image: string; imageAlt?: string; primary: { text: string; href: string }; secondary?: { text: string; href: string }; stats?: { value: string; label: string }[]; }
+const { focal = 'center', eyebrow, title, subtitle, image, imageAlt = '', primary, secondary, stats = [] } = Astro.props;
 ---
 <section class="relative isolate overflow-hidden bg-ink-deep text-white">
-  <ProImage src={image} alt={imageAlt} eager sizes="100vw" widths={[640, 1024, 1600, 2200]} class="absolute inset-0 -z-20 h-full w-full object-cover" />
+  <ProImage src={image} alt={imageAlt} focal={focal} eager sizes="100vw" widths={[640, 1024, 1600, 2200]} class="absolute inset-0 -z-20 h-full w-full object-cover" />
   <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-deep/90 via-ink-deep/60 to-ink-deep/10"></div>
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-deep/80 via-transparent to-transparent"></div>
   <div class="container-page flex min-h-[min(88vh,780px)] flex-col justify-end pb-10 pt-32 lg:pb-14">

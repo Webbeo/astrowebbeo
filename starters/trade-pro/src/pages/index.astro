@@ -16,7 +16,7 @@ const metadata = { title: c.hero.title.replace(/\*/g, ''), description: b.descri
 ---
 <Layout metadata={metadata}>
   <LocalBusinessSchema name={b.name} phone={b.phone} email={b.email} town={b.town} description={b.description} />
-  <PhotoHero eyebrow={c.hero.eyebrow} title={c.hero.title} subtitle={c.hero.subtitle} image={c.hero.image} imageAlt={c.hero.imageAlt}
+  <PhotoHero eyebrow={c.hero.eyebrow} title={c.hero.title} subtitle={c.hero.subtitle} image={c.hero.image} imageAlt={c.hero.imageAlt} focal={c.hero.focal}
     primary={{ text: b.ctaText ?? 'Get a quote', href: getPermalink('/contact') }} secondary={{ text: 'Our services', href: getPermalink('/services') }} stats={c.hero.stats} />
   <TickerStrip items={c.ticker} />
   <SplitFeature eyebrow={c.intro.eyebrow} title={c.intro.title} paragraphs={c.intro.paragraphs} image={c.intro.image} imageAlt={c.intro.imageAlt}
