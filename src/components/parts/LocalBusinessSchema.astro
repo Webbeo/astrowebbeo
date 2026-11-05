@@ -1,0 +1,26 @@
+---
+// LocalBusiness JSON-LD built from the demo's content.json `business` block.
+export interface Props {
+  name: string;
+  phone?: string;
+  email?: string;
+  town?: string;
+  areas?: string[];
+  description?: string;
+}
+const { name, phone, email, town, areas = [], description } = Astro.props;
+const url = new URL(import.meta.env.BASE_URL, Astro.site).toString();
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name,
+  url,
+  ...(description && { description }),
+  ...(phone && { telephone: phone }),
+  ...(email && { email }),
+  ...(town && { address: { '@type': 'PostalAddress', addressLocality: town } }),
+  ...(areas.length && { areaServed: areas }),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

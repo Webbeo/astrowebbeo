@@ -1,0 +1,26 @@
+---
+// Embeds the shared GoHighLevel form. In demo builds the demo slug is passed as ?slug=
+// for attribution (PUBLIC_DEMO_SLUG, set by tools/build-demo.mjs). Needs a hidden field
+// keyed `slug` on the GHL form to capture it; confirm that with ops before relying on it.
+export interface Props {
+  formId: string;
+  title?: string;
+  height?: number;
+}
+const { formId, title = 'Contact form', height = 600 } = Astro.props;
+const demoSlug = import.meta.env.PUBLIC_DEMO_SLUG;
+const src =
+  `https://api.leadconnectorhq.com/widget/form/${encodeURIComponent(formId)}` +
+  (demoSlug ? `?slug=${encodeURIComponent(demoSlug)}` : '');
+---
+
+<div class="mx-auto max-w-3xl">
+  <iframe
+    src={src}
+    id={`inline-${formId}`}
+    title={title}
+    data-form-id={formId}
+    loading="lazy"
+    style={`width:100%;min-height:${height}px;border:none;border-radius:3px`}></iframe>
+  <script is:inline src="https://link.msgsndr.com/js/form_embed.js"></script>
+</div>

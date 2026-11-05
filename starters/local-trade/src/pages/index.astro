@@ -1,0 +1,41 @@
+---
+import Layout from '~/layouts/TradeLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import LocalBusinessSchema from '~/components/parts/LocalBusinessSchema.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+
+const b = c.business;
+const metadata = { title: b.tagline, description: b.description };
+---
+
+<Layout metadata={metadata}>
+  <LocalBusinessSchema {...b} />
+  <Hero
+    tagline={b.town}
+    title={c.hero.title}
+    subtitle={c.hero.subtitle}
+    actions={[
+      { variant: 'primary', text: `Call ${b.phone}`, href: `tel:${b.phone}` },
+      { text: 'Get a quote', href: getPermalink('/contact') },
+    ]}
+  />
+  <Stats stats={c.trust} />
+  <Features2
+    id="services"
+    title="Our services"
+    items={c.services.map((s) => ({ title: s.title, description: s.summary, icon: s.icon, href: getPermalink(`/services/${s.slug}`) }))}
+  />
+  <Testimonials title="What customers say" testimonials={c.reviews} />
+  <FAQs title="Common questions" items={c.faqs} />
+  <CallToAction
+    title="Ready to get started?"
+    subtitle={`Serving ${b.areas.join(', ')}. ${b.hours}`}
+    actions={[{ variant: 'primary', text: 'Contact us', href: getPermalink('/contact') }]}
+  />
+</Layout>

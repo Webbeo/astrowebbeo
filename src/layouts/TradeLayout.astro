@@ -1,0 +1,28 @@
+---
+// Page shell for local-trade sites: no announcement bar, no RSS link, demo banner when
+// building a demo. Navigation comes from the site's own src/navigation.ts.
+import Layout from '~/layouts/Layout.astro';
+import Header from '~/components/widgets/Header.astro';
+import Footer from '~/components/widgets/Footer.astro';
+import DemoBanner from '~/components/parts/DemoBanner.astro';
+
+import { headerData, footerData } from '~/navigation';
+
+import type { MetaData } from '~/types';
+
+export interface Props {
+  metadata?: MetaData;
+}
+
+const { metadata } = Astro.props;
+---
+
+<Layout metadata={metadata}>
+  <slot name="head" slot="head" />
+  <DemoBanner />
+  <Header {...headerData} isSticky />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer {...footerData} />
+</Layout>

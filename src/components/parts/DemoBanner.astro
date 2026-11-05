@@ -1,0 +1,13 @@
+---
+// Shown only in demo builds (PUBLIC_DEMO=true, set by tools/build-demo.mjs).
+// Absent from live builds; tools/check-build.mjs fails a live build that contains it.
+const isDemo = import.meta.env.PUBLIC_DEMO === 'true';
+---
+
+{
+  isDemo && (
+    <div data-webbeo-demo class="bg-amber-100 px-4 py-1.5 text-center text-sm text-amber-900">
+      Demo preview. This is not a live website.
+    </div>
+  )
+}

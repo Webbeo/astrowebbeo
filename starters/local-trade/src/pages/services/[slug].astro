@@ -1,0 +1,24 @@
+---
+import Layout from '~/layouts/TradeLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features from '~/components/widgets/Features.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+
+export function getStaticPaths() {
+  return c.services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+const metadata = { title: service.title, description: service.summary };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline={c.business.town} title={service.title} subtitle={service.intro} />
+  <Features items={service.points.map((p) => ({ title: p, icon: 'tabler:check' }))} columns={3} />
+  <CallToAction
+    title={`Need ${service.title}?`}
+    actions={[{ variant: 'primary', text: 'Get a quote', href: getPermalink('/contact') }]}
+  />
+</Layout>

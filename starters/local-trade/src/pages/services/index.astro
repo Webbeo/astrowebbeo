@@ -1,0 +1,21 @@
+---
+import Layout from '~/layouts/TradeLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { getPermalink } from '~/utils/permalinks';
+import c from '~/data/content.json';
+
+const metadata = { title: 'Services', description: c.business.description };
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Services" title={`Services in ${c.business.town}`} />
+  <Features2
+    items={c.services.map((s) => ({ title: s.title, description: s.summary, icon: s.icon, href: getPermalink(`/services/${s.slug}`) }))}
+  />
+  <CallToAction
+    title="Not sure what you need?"
+    actions={[{ variant: 'primary', text: 'Contact us', href: getPermalink('/contact') }]}
+  />
+</Layout>

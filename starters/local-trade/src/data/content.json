@@ -1,0 +1,126 @@
+{
+  "business": {
+    "name": "[PLACEHOLDER business name]",
+    "tagline": "[PLACEHOLDER tagline]",
+    "description": "[PLACEHOLDER one-sentence description]",
+    "phone": "[PLACEHOLDER phone]",
+    "email": "[PLACEHOLDER email]",
+    "town": "[PLACEHOLDER town]",
+    "areas": [
+      "[PLACEHOLDER service area]"
+    ],
+    "hours": "[PLACEHOLDER opening hours]"
+  },
+  "hero": {
+    "title": "[PLACEHOLDER hero headline]",
+    "subtitle": "[PLACEHOLDER hero subtitle]"
+  },
+  "trust": [
+    {
+      "amount": "[PLACEHOLDER number]",
+      "title": "[PLACEHOLDER trust point]",
+      "icon": "tabler:shield-check"
+    },
+    {
+      "amount": "[PLACEHOLDER number]",
+      "title": "[PLACEHOLDER trust point]",
+      "icon": "tabler:shield-check"
+    },
+    {
+      "amount": "[PLACEHOLDER number]",
+      "title": "[PLACEHOLDER trust point]",
+      "icon": "tabler:shield-check"
+    }
+  ],
+  "services": [
+    {
+      "slug": "service-1",
+      "title": "[PLACEHOLDER service 1]",
+      "summary": "[PLACEHOLDER service summary]",
+      "icon": "tabler:tool",
+      "intro": "[PLACEHOLDER service intro]",
+      "points": [
+        "[PLACEHOLDER point 1]",
+        "[PLACEHOLDER point 2]",
+        "[PLACEHOLDER point 3]"
+      ]
+    },
+    {
+      "slug": "service-2",
+      "title": "[PLACEHOLDER service 2]",
+      "summary": "[PLACEHOLDER service summary]",
+      "icon": "tabler:tool",
+      "intro": "[PLACEHOLDER service intro]",
+      "points": [
+        "[PLACEHOLDER point 1]",
+        "[PLACEHOLDER point 2]",
+        "[PLACEHOLDER point 3]"
+      ]
+    },
+    {
+      "slug": "service-3",
+      "title": "[PLACEHOLDER service 3]",
+      "summary": "[PLACEHOLDER service summary]",
+      "icon": "tabler:tool",
+      "intro": "[PLACEHOLDER service intro]",
+      "points": [
+        "[PLACEHOLDER point 1]",
+        "[PLACEHOLDER point 2]",
+        "[PLACEHOLDER point 3]"
+      ]
+    }
+  ],
+  "about": {
+    "title": "[PLACEHOLDER about headline]",
+    "subtitle": "[PLACEHOLDER about subtitle]",
+    "points": [
+      {
+        "title": "[PLACEHOLDER strength]",
+        "description": "[PLACEHOLDER strength detail]",
+        "icon": "tabler:check"
+      },
+      {
+        "title": "[PLACEHOLDER strength]",
+        "description": "[PLACEHOLDER strength detail]",
+        "icon": "tabler:check"
+      },
+      {
+        "title": "[PLACEHOLDER strength]",
+        "description": "[PLACEHOLDER strength detail]",
+        "icon": "tabler:check"
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "name": "[PLACEHOLDER customer name]",
+      "job": "[PLACEHOLDER customer town]",
+      "testimonial": "[PLACEHOLDER review text]",
+      "rating": 5
+    },
+    {
+      "name": "[PLACEHOLDER customer name]",
+      "job": "[PLACEHOLDER customer town]",
+      "testimonial": "[PLACEHOLDER review text]",
+      "rating": 5
+    }
+  ],
+  "faqs": [
+    {
+      "title": "[PLACEHOLDER question]",
+      "description": "[PLACEHOLDER answer]"
+    },
+    {
+      "title": "[PLACEHOLDER question]",
+      "description": "[PLACEHOLDER answer]"
+    },
+    {
+      "title": "[PLACEHOLDER question]",
+      "description": "[PLACEHOLDER answer]"
+    }
+  ],
+  "contact": {
+    "title": "[PLACEHOLDER contact headline]",
+    "subtitle": "[PLACEHOLDER contact subtitle]"
+  }
+}
