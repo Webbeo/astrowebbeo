@@ -61,3 +61,5 @@ live has none of those and no slug / `try.webbeo.ai`. Live also fails on any `[P
 - Library additions are new files; edit upstream AstroWind files minimally (syncs stay cheap).
 - A part enters the library only after a real build used it, with client info removed and placeholders in.
 - Live builds refuse a dirty engine checkout. Demos pin the engine sha in `site.json`.
+
+Checks: `tools/check-hover.mjs` (run by build-demo) forces :hover on every button on every page and fails on contrast <4.5:1 or a vanishing button. Buttons use `--color-signal-btn`; hover rules live in `pro.css` as `a.pbtn:hover` (not utilities).
