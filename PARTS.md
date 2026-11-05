@@ -43,6 +43,7 @@ Used by the `trade-pro` starter. Palette/fonts come from the site's `CustomStyle
 | `ProImage` | Local image by file name, webp, lazy; sand block if missing | `src`, `alt`, `focal?`, `eager?` |
 Rules: 2-3 `*accent*` words per site; own palette + font pair per demo (fonts: Fraunces, DM Serif Display, Instrument Serif, DM Sans, Manrope, Barlow Condensed); real photography for every slot; button classes are `pbtn*` (not `btn-primary`, which is AstroWind's).
 Overlay pages are copied from the starter at `new-demo` time; later starter edits do not reach existing overlays.
+Motion: scroll reveals use AstroWind's `<Intersect/>` via `REVEAL`/`REVEAL_NOQ` (`~/utils/pro`); hero parallax/entrance are CSS-only (`.parallax-img`, `.hero-in`, `.accent-rule` in `pro.css`, scroll-driven animation, static fallback); page changes use Astro View Transitions (`ProLayout` fades `<main>`, `ProHeader` is persisted). All gated by `prefers-reduced-motion`.
 
 ## Commands (run from the engine checkout)
 - `node tools/new-demo.mjs <slug> [--starter trade-pro|local-trade]` (use trade-pro) creates the overlay.
