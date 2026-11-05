@@ -28,8 +28,24 @@ Full widget props: `.agents/skills/use-widgets.md` (AstroWind catalogue, all 30+
 
 Any overlay file replaces the engine file at the same path.
 
+## Visual layer (`src/components/pro`, `src/layouts/ProLayout.astro`, `src/assets/styles/pro.css`)
+Used by the `trade-pro` starter. Palette/fonts come from the site's `CustomStyles.astro` (`--pro-*`). Every photo slot is a file name in `src/assets/images`; a missing file fails `check-build`.
+| Part | Use | Props |
+|---|---|---|
+| `ProLayout` | Shell: demo banner, ProHeader, ProFooter, built from `content.json` | `metadata` |
+| `PhotoHero` | Full-bleed photo hero, `*accent*` word in title, stats | `title`, `subtitle`, `image`, `focal?`, `primary`, `secondary?`, `stats?` |
+| `TrustRow` | 4 icon trust points under hero | `items[{icon,title,text}]` |
+| `ServiceCards` | Image cards; `layout="feature"` = 2 large + rest small | `title`, `items[{title,summary,image,href}]`, `layout?` |
+| `SplitFeature` | Photo + text + points | `title`, `paragraphs`, `image`, `focal?`, `points?`, `flip?` |
+| `ProcessBand` | Dark numbered steps band | `title`, `steps[{title,text}]` |
+| `ReviewBand` | Lead dark quote + smaller cards | `title`, `reviews[{quote,name,place}]` |
+| `FaqList` / `CtaBand` / `PageHero` / `SectionHead` / `TickerStrip` | Supporting sections | see source |
+| `ProImage` | Local image by file name, webp, lazy; sand block if missing | `src`, `alt`, `focal?`, `eager?` |
+Rules: 2-3 `*accent*` words per site; own palette + font pair per demo (fonts: Fraunces, DM Serif Display, Instrument Serif, DM Sans, Manrope, Barlow Condensed); real photography for every slot; button classes are `pbtn*` (not `btn-primary`, which is AstroWind's).
+Overlay pages are copied from the starter at `new-demo` time; later starter edits do not reach existing overlays.
+
 ## Commands (run from the engine checkout)
-- `node tools/new-demo.mjs <slug> [--starter local-trade]` creates the overlay.
+- `node tools/new-demo.mjs <slug> [--starter trade-pro|local-trade]` (use trade-pro) creates the overlay.
 - `node tools/build-demo.mjs <slug>` builds the demo at `/<slug>` into `out/<slug>/dist`.
 - `node tools/build-demo.mjs <slug> --live --site https://<domain>` builds for `/` into `out/<slug>/dist-live`.
 - Both run `tools/check-build.mjs`. A failed check writes no dist.
