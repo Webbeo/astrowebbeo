@@ -1,0 +1,27 @@
+/* Webbeo visual layer. Per-site CustomStyles.astro sets the --pro-* variables (palette, fonts);
+   everything below follows. Square corners, tracked uppercase micro-type, one accent colour. */
+@theme {
+  --color-surface: var(--pro-surface, #f6f1e8);
+  --color-surface-2: var(--pro-surface-2, #ece4d4);
+  --color-ink: var(--pro-ink, #14262e);
+  --color-ink-deep: var(--pro-ink-deep, #0c1a20);
+  --color-signal: var(--pro-signal, #c2612d);
+  --color-signal-soft: var(--pro-signal-soft, #e8a57c);
+  --color-line: var(--pro-line, #d8cfbd);
+  --color-stone: var(--pro-stone, #6b6659);
+  --font-display: var(--pro-font-display, Georgia), Georgia, 'Times New Roman', serif;
+  --font-body: var(--pro-font-body, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+  --shadow-lift: 0 24px 60px -24px rgb(12 26 32 / 0.35);
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10; }
+  .eyebrow { @apply font-body text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-signal; }
+  .micro { @apply font-body text-[0.625rem] font-medium uppercase tracking-[0.18em]; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 bg-signal px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-ink; }
+  .btn-outline { @apply inline-flex items-center justify-center gap-2 border border-current px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 hover:bg-ink hover:text-surface hover:border-ink; }
+  .btn-light { @apply inline-flex items-center justify-center gap-2 border border-white/60 px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:bg-white hover:text-ink; }
+  .nav-link { @apply font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:text-signal; }
+  .h-display { @apply font-display font-normal leading-[1.02] tracking-[-0.015em]; }
+}

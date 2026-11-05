@@ -1,0 +1,15 @@
+---
+// Local image by file name from src/assets/images (the overlay supplies them). Falls back to a
+// visible sand block if the file is missing, so a missing photo is obvious, never silent.
+import { Image } from 'astro:assets';
+interface Props { src: string; alt?: string; class?: string; sizes?: string; widths?: number[]; eager?: boolean; }
+const all = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
+const { src, alt = '', class: cls = '', sizes = '100vw', widths = [480, 800, 1200, 1800], eager = false } = Astro.props;
+const meta = all[`/src/assets/images/${src}`]?.default;
+---
+{meta ? (
+  <Image src={meta} alt={alt} class={cls} widths={widths} sizes={sizes} format="webp" quality={72}
+    loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+) : (
+  <div class:list={['bg-surface-2', cls]} role="img" aria-label={alt} data-missing-image={src}></div>
+)}

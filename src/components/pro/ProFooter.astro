@@ -1,0 +1,22 @@
+---
+import { tel } from '~/utils/pro';
+interface Props { name: string; blurb: string; phone: string; email: string; address: string[]; hours?: string; explore: { text: string; href: string }[]; services: { text: string; href: string }[]; cta: { text: string; href: string }; credit?: string; }
+const { name, blurb, phone, email, address, hours, explore, services, cta } = Astro.props;
+---
+<footer class="bg-ink-deep text-white">
+  <div class="container-page grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <div>
+      <p class="font-display text-3xl">{name}</p>
+      <p class="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{blurb}</p>
+      <a href={cta.href} class="btn-primary mt-7">{cta.text}</a>
+    </div>
+    <nav aria-label="Explore"><h2 class="micro mb-5 text-signal-soft">Explore</h2><ul class="space-y-3 text-sm text-white/75">{explore.map((l) => <li><a class="hover:text-white" href={l.href}>{l.text}</a></li>)}</ul></nav>
+    <nav aria-label="Services"><h2 class="micro mb-5 text-signal-soft">Services</h2><ul class="space-y-3 text-sm text-white/75">{services.map((l) => <li><a class="hover:text-white" href={l.href}>{l.text}</a></li>)}</ul></nav>
+    <div><h2 class="micro mb-5 text-signal-soft">Get in touch</h2>
+      <address class="space-y-1 text-sm not-italic text-white/75">{address.map((a) => <p>{a}</p>)}</address>
+      <p class="mt-4 space-y-1 text-sm"><a class="block text-white hover:text-signal-soft" href={tel(phone)}>{phone}</a><a class="block text-white/75 hover:text-white" href={`mailto:${email}`}>{email}</a></p>
+      {hours && <p class="micro mt-4 text-white/50">{hours}</p>}
+    </div>
+  </div>
+  <div class="border-t border-white/10"><div class="container-page micro flex flex-wrap justify-between gap-3 py-5 text-white/45"><p>© {new Date().getFullYear()} {name}. All rights reserved.</p><span></span></div></div>
+</footer>

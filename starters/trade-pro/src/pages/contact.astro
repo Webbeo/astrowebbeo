@@ -1,0 +1,23 @@
+---
+import Layout from '~/layouts/ProLayout.astro';
+import PageHero from '~/components/pro/PageHero.astro';
+import GhlForm from '~/components/parts/GhlForm.astro';
+import { tel } from '~/utils/pro';
+import c from '~/data/content.json';
+import site from '~/data/site.json';
+const b = c.business;
+const metadata = { title: 'Contact', description: c.contact.intro };
+---
+<Layout metadata={metadata}>
+  <PageHero eyebrow="Contact" title={c.contact.title} intro={c.contact.intro} />
+  <section class="bg-surface py-16 lg:py-24"><div class="container-page grid gap-14 lg:grid-cols-[1fr_1.4fr]">
+    <div>
+      <p class="eyebrow mb-4">Talk to us</p>
+      <a href={tel(b.phone)} class="h-display block text-4xl text-ink hover:text-signal sm:text-5xl">{b.phone}</a>
+      <a href={`mailto:${b.email}`} class="mt-3 block text-stone hover:text-signal">{b.email}</a>
+      <address class="mt-8 border-t border-line pt-6 text-sm not-italic leading-relaxed text-stone">{b.address.map((a) => <p>{a}</p>)}<p class="micro mt-4 text-ink">{b.hours}</p></address>
+      <ul class="mt-8 space-y-2 text-sm text-stone">{c.contact.notes.map((n) => <li class="flex gap-3"><span class="text-signal">→</span>{n}</li>)}</ul>
+    </div>
+    <div class="border border-line bg-white p-6 sm:p-8"><GhlForm formId={site.ghlFormId} /></div>
+  </div></section>
+</Layout>

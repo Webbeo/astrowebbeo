@@ -1,0 +1,24 @@
+---
+import ProImage from './ProImage.astro';
+import { emph, tel } from '~/utils/pro';
+interface Props { eyebrow?: string; title: string; subtitle: string; image: string; imageAlt?: string; primary: { text: string; href: string }; secondary?: { text: string; href: string }; stats?: { value: string; label: string }[]; }
+const { eyebrow, title, subtitle, image, imageAlt = '', primary, secondary, stats = [] } = Astro.props;
+---
+<section class="relative isolate overflow-hidden bg-ink-deep text-white">
+  <ProImage src={image} alt={imageAlt} eager sizes="100vw" widths={[640, 1024, 1600, 2200]} class="absolute inset-0 -z-20 h-full w-full object-cover" />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-deep/90 via-ink-deep/60 to-ink-deep/10"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink-deep/80 via-transparent to-transparent"></div>
+  <div class="container-page flex min-h-[min(88vh,780px)] flex-col justify-end pb-10 pt-32 lg:pb-14">
+    <div class="max-w-3xl">
+      {eyebrow && <p class="eyebrow mb-6 text-signal-soft">{eyebrow}</p>}
+      <h1 class="h-display text-[2.9rem] sm:text-7xl lg:text-[5.6rem]" set:html={emph(title).replace(/text-signal/g, 'text-signal-soft')} />
+      <p class="mt-7 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">{subtitle}</p>
+      <div class="mt-9 flex flex-wrap gap-3"><a href={primary.href} class="btn-primary">{primary.text}</a>{secondary && <a href={secondary.href} class="btn-light">{secondary.text}</a>}</div>
+    </div>
+    {stats.length > 0 && (
+      <dl class="mt-14 grid max-w-3xl grid-cols-3 gap-6 border-t border-white/20 pt-6">
+        {stats.map((s) => <div><dd class="font-display text-3xl sm:text-4xl">{s.value}</dd><dt class="micro mt-1.5 text-white/60">{s.label}</dt></div>)}
+      </dl>
+    )}
+  </div>
+</section>

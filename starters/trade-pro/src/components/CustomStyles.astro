@@ -1,0 +1,36 @@
+---
+// Per-site theme. Change the --pro-* values and the two <Font> lines; everything follows.
+// Fonts available (cssVariable): --font-fraunces, --font-dm-serif, --font-instrument-serif (display);
+// --font-inter, --font-dm-sans, --font-manrope, --font-barlow-condensed (body).
+import { Font } from 'astro:assets';
+---
+<Font cssVariable="--font-dm-serif" preload />
+<Font cssVariable="--font-dm-sans" preload />
+<style is:inline>
+  :root {
+    --pro-font-display: var(--font-dm-serif);
+    --pro-font-body: var(--font-dm-sans);
+    --pro-surface: #f6f1e8;
+    --pro-surface-2: #ece4d4;
+    --pro-ink: #14262e;
+    --pro-ink-deep: #0c1a20;
+    --pro-signal: #c2612d;
+    --pro-signal-soft: #e8a57c;
+    --pro-line: #d8cfbd;
+    --pro-stone: #6b6659;
+
+    /* legacy AstroWind vars, kept so engine widgets (404 etc.) match */
+    --aw-font-sans: var(--pro-font-body);
+    --aw-font-serif: var(--pro-font-display);
+    --aw-font-heading: var(--pro-font-display);
+    --aw-color-primary: #c2612d;
+    --aw-color-secondary: #14262e;
+    --aw-color-accent: #c2612d;
+    --aw-color-text-heading: #14262e;
+    --aw-color-text-default: #14262e;
+    --aw-color-text-muted: #6b6659;
+    --aw-color-bg-page: #f6f1e8;
+    --aw-color-bg-page-dark: #0c1a20;
+  }
+  body { background: var(--pro-surface); color: var(--pro-ink); font-family: var(--pro-font-body), ui-sans-serif, system-ui, sans-serif; }
+</style>
