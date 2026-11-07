@@ -16,7 +16,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-export function checkBuild({ dist, mode, slug, site, ghlFormId, forbid = [] }) {
+export function checkBuild({ dist, mode, slug, site, ghlFormId, noForm = false, forbid = [] }) {
   const errors = [];
   const warnings = [];
   const live = mode === 'live';
@@ -95,7 +95,14 @@ export function checkBuild({ dist, mode, slug, site, ghlFormId, forbid = [] }) {
     errors.push(`missing image file(s) in src/assets/images: ${names.slice(0, 8).join(', ')}${names.length > 8 ? ` +${names.length - 8}` : ''}`);
   }
   // 3. shared GHL form
-  if (!ghlFormId) errors.push('site.json has no ghlFormId');
+  if (noForm) {
+    // Demo-only escape hatch for a prospect whose real form ID is not known yet. Never a fake ID.
+    if (live) errors.push('site.json noForm is demo-only: a live build must embed the real GHL form');
+    else {
+      warnings.push('noForm: contact form deliberately omitted; set ghlFormId and noForm:false before going live');
+      if (html.some((f) => read(f).includes('/widget/form/'))) errors.push('noForm is set but a GHL form is embedded');
+    }
+  } else if (!ghlFormId) errors.push('site.json has no ghlFormId');
   else if (!html.some((f) => read(f).includes(`/widget/form/${ghlFormId}`))) errors.push(`GHL form ${ghlFormId} is not embedded on any page`);
 
   return { errors, warnings, pages: html.length };

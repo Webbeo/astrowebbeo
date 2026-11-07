@@ -1,0 +1,34 @@
+---
+import ProImage from './ProImage.astro';
+import { emph } from '~/utils/pro';
+// Credential-led hero: dark panel with grid texture, copy left, tall photo bleeding off the right edge,
+// a floating credential card (badge image + line) and a big-numeral stats row. For firms that sell on proof.
+interface Props { focal?: string; eyebrow?: string; title: string; subtitle: string; image: string; imageAlt?: string; primary: { text: string; href: string }; secondary?: { text: string; href: string }; stats?: { value: string; label: string }[]; badge?: { image: string; title: string; text: string }; }
+const { focal = 'center', eyebrow, title, subtitle, image, imageAlt = '', primary, secondary, stats = [], badge } = Astro.props;
+---
+<section class="relative isolate overflow-hidden bg-ink-deep text-white">
+  <div class="grid-lines absolute inset-0 -z-10"></div>
+  <div class="container-page grid gap-10 lg:min-h-[min(84vh,740px)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+    <div class="hero-in flex flex-col justify-center pb-2 pt-14 lg:py-20">
+      {eyebrow && <p class="eyebrow mb-6 text-signal-soft">{eyebrow}</p>}
+      <h1 class="h-display text-[2.6rem] sm:text-6xl lg:text-[4.4rem]" set:html={emph(title).replace(/text-signal/g, 'text-signal-soft')} />
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">{subtitle}</p>
+      <div class="mt-9 flex flex-wrap gap-3"><a href={primary.href} class="pbtn">{primary.text}</a>{secondary && <a href={secondary.href} class="pbtn-light">{secondary.text}</a>}</div>
+    </div>
+    <div class="bleed-r relative min-h-[400px] lg:min-h-0">
+      <ProImage src={image} alt={imageAlt} focal={focal} eager sizes="(min-width:1024px) 700px, 100vw" widths={[640, 1024, 1500]} class="hero-photo absolute inset-0 h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink-deep/50 via-transparent to-transparent"></div>
+      {badge && (
+        <div class="absolute bottom-5 left-5 flex max-w-[19rem] items-center gap-4 bg-white p-4 text-ink shadow-lift lg:-left-10 lg:bottom-14">
+          <ProImage src={badge.image} alt="" sizes="96px" widths={[160, 320]} class="h-14 w-auto shrink-0" />
+          <div><p class="font-display text-base leading-tight">{badge.title}</p><p class="mt-1 text-xs leading-snug text-stone">{badge.text}</p></div>
+        </div>
+      )}
+    </div>
+  </div>
+  {stats.length > 0 && (
+    <div class="hero-stats border-t border-white/15"><dl class="container-page grid grid-cols-3 gap-6 py-7">
+      {stats.map((s) => <div><dd class="font-display text-3xl sm:text-5xl">{s.value}</dd><dt class="micro mt-2 text-white/65">{s.label}</dt></div>)}
+    </dl></div>
+  )}
+</section>

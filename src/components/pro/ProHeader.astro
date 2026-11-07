@@ -2,8 +2,9 @@
 import { Icon } from 'astro-icon/components';
 import { getPermalink, getHomePermalink } from '~/utils/permalinks';
 import { tel } from '~/utils/pro';
-interface Props { name: string; mark?: string; sub?: string; phone: string; strap?: string; links: { text: string; href: string }[]; cta: { text: string; href: string }; }
-const { name, mark, sub, phone, strap, links, cta } = Astro.props;
+import ProImage from './ProImage.astro';
+interface Props { logo?: string; name: string; mark?: string; sub?: string; phone: string; strap?: string; links: { text: string; href: string }[]; cta: { text: string; href: string }; }
+const { logo, name, mark, sub, phone, strap, links, cta } = Astro.props;
 ---
 <header class="sticky top-0 z-50" transition:name="pro-header" transition:persist>
   <div class="hidden border-b border-white/10 bg-ink-deep text-white md:block">
@@ -15,8 +16,8 @@ const { name, mark, sub, phone, strap, links, cta } = Astro.props;
   <div class="border-b border-line/80 bg-surface/95 backdrop-blur-md">
     <div class="container-page flex h-[72px] items-center justify-between gap-6 lg:h-[84px]">
       <a href={getHomePermalink()} aria-label={`${name} home`} class="group flex items-center gap-3 leading-none transition-opacity hover:opacity-80">
-        {mark && <span class="grid h-10 w-10 place-items-center bg-ink text-signal-soft"><Icon name={mark} class="h-5 w-5" /></span>}
-        <span class="flex flex-col"><span class="font-display text-[1.35rem] leading-none text-ink">{name}</span>{sub && <span class="micro mt-1.5 text-[0.56rem] text-ink/60">{sub}</span>}</span>
+        {logo ? <ProImage src={logo} alt={name} class="h-10 w-auto lg:h-14" widths={[240, 480]} sizes="240px" eager /> : <>{mark && <span class="grid h-10 w-10 place-items-center bg-ink text-signal-soft"><Icon name={mark} class="h-5 w-5" /></span>}
+        <span class="flex flex-col"><span class="font-display text-[1.35rem] leading-none text-ink">{name}</span>{sub && <span class="micro mt-1.5 text-[0.56rem] text-ink/60">{sub}</span>}</span></>}
       </a>
       <nav aria-label="Primary" class="hidden items-center gap-8 lg:flex">{links.map((l) => <a href={l.href} class="nav-link">{l.text}</a>)}</nav>
       <div class="flex items-center gap-3">

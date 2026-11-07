@@ -63,3 +63,19 @@ live has none of those and no slug / `try.webbeo.ai`. Live also fails on any `[P
 - Live builds refuse a dirty engine checkout. Demos pin the engine sha in `site.json`.
 
 Checks: `tools/check-hover.mjs` (run by build-demo) forces :hover on every button on every page and fails on contrast <4.5:1 or a vanishing button. Buttons use `--color-signal-btn`; hover rules live in `pro.css` as `a.pbtn:hover` (not utilities).
+
+## Prospect tooling
+- `noForm` (site.json, demos only): contact page without a form; `check-build` fails any live build that sets it.
+- `tools/logo-prep.mjs <in> <outDir>`: logo on plain background -> transparent `logo.png` + `logo-white.png`; ProHeader/ProFooter take `logo`/`logoLight`.
+- `tools/shot.mjs <url> <out.png> [--w N]`: full-page screenshot, motion frozen.
+- `check-hover` also scans resting text contrast (solid backgrounds only; text over photos skipped).
+
+## Layout variants (pick per business; `tools/layout-diff.mjs` fails demos that share a skeleton)
+| Slot | Parts |
+|---|---|
+| Hero | `PhotoHero` full-bleed · `SplitHero` dark grid panel + tall photo + credential card |
+| Audience / services | `ServiceCards` (feature/grid) · `SectorPanels` expanding audience panels · `ServiceIndex` editorial list |
+| Proof | `TrustRow` · `PromiseBand` guarantee + big figure · `ProjectMosaic` bento of own work · `CoverageMap` |
+| Process | `ProcessBand` dark · `TimelineSteps` light, sticky heading |
+| Reviews | `ReviewBand` lead quote · `ReviewStrip` three equal |
+Write `sites/<slug>/LAYOUT.md` (why this skeleton) before the home page. Parts take props only; no client content.

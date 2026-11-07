@@ -3,6 +3,7 @@
   "starter": "",
   "trade": "[PLACEHOLDER trade]",
   "ghlFormId": "[PLACEHOLDER-FORM-ID]",
+  "noForm": false,
   "forbid": [],
   "inheritPages": [
     "404.astro"

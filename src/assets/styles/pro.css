@@ -25,7 +25,7 @@
   .pbtn-outline { @apply inline-flex items-center justify-center gap-2 border border-current px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-300; }
   .pbtn-light { @apply inline-flex items-center justify-center gap-2 border border-white/60 px-6 py-3.5 font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-300; }
   .nav-link { @apply font-body text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:text-signal; }
-  .h-display { @apply font-display font-normal leading-[1.02] tracking-[-0.015em]; }
+  .h-display { @apply font-display leading-[1.02] tracking-[-0.015em]; font-weight: var(--pro-display-weight, 400); }
 }
 
 /* ---- Motion (Webbeo visual layer). All of it is off under prefers-reduced-motion. ---- */
@@ -61,3 +61,21 @@
 a.pbtn:hover, button.pbtn:hover { background-color: color-mix(in srgb, var(--color-signal) 68%, black); color: #fff; }
 a.pbtn-outline:hover, button.pbtn-outline:hover { background-color: var(--color-ink); border-color: var(--color-ink); color: var(--color-surface); }
 a.pbtn-light:hover, button.pbtn-light:hover { background-color: #fff; border-color: #fff; color: var(--color-ink); }
+
+/* Emphasis style is a per-site token: serif displays keep italic, sans displays set --pro-em-style: normal. */
+h1 em, h2 em, h3 em { font-style: var(--pro-em-style, italic); }
+
+/* ---- Layout-variety parts (SplitHero, SectorPanels, ...) ---- */
+@layer components {
+  .grid-lines { background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px); background-size: 72px 72px; -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%); }
+  .panels { display: grid; gap: 0.75rem; }
+  .panel-more { display: block; }
+}
+@media (min-width: 1024px) {
+  .bleed-r { margin-right: calc(-1 * max(2.5rem, (100vw - 1240px) / 2 + 2.5rem)); }
+  .panels { display: flex; height: 34rem; }
+  .panel { flex: 1 1 0%; min-width: 0; transition: flex 0.8s var(--ease-brand); }
+  .panel .panel-more { max-height: 0; opacity: 0; transform: translateY(12px); overflow: hidden; transition: opacity 0.35s ease, transform 0.6s var(--ease-brand), max-height 0.6s var(--ease-brand); }
+  .panels:not(:hover):not(:focus-within) .panel:first-child, .panel:hover, .panel:focus-within { flex: 2.3 1 0%; }
+  .panels:not(:hover):not(:focus-within) .panel:first-child .panel-more, .panel:hover .panel-more, .panel:focus-within .panel-more { max-height: 22rem; opacity: 1; transform: none; transition-delay: 0.12s; }
+}

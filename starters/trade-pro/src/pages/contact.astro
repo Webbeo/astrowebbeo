@@ -18,6 +18,15 @@ const metadata = { title: 'Contact', description: c.contact.intro };
       <address class="mt-8 border-t border-line pt-6 text-sm not-italic leading-relaxed text-stone">{b.address.map((a) => <p>{a}</p>)}<p class="micro mt-4 text-ink">{b.hours}</p></address>
       <ul class="mt-8 space-y-2 text-sm text-stone">{c.contact.notes.map((n) => <li class="flex gap-3"><span class="text-signal">→</span>{n}</li>)}</ul>
     </div>
-    <div class="border border-line bg-white p-6 sm:p-8"><GhlForm formId={site.ghlFormId} /></div>
+    {site.noForm ? (
+      <div class="border border-line bg-white p-8 sm:p-10">
+        <p class="eyebrow mb-3">Get in touch</p>
+        <p class="h-display text-3xl text-ink sm:text-4xl">Call or email and we will come straight back to you.</p>
+        <p class="mt-4 text-stone">Online enquiries switch on when the site goes live.</p>
+        <div class="mt-8 flex flex-wrap gap-3"><a href={tel(b.phone)} class="pbtn">Call {b.phone}</a><a href={`mailto:${b.email}`} class="pbtn-outline text-ink">Email us</a></div>
+      </div>
+    ) : (
+      <div class="border border-line bg-white p-6 sm:p-8"><GhlForm formId={site.ghlFormId} /></div>
+    )}
   </div></section>
 </Layout>

@@ -17,9 +17,9 @@ const cta = { text: b.ctaText ?? 'Get a quote', href: getPermalink('/contact') }
 <Layout metadata={metadata}>
   <slot name="head" slot="head" />
   <DemoBanner />
-  <ProHeader name={b.name} mark={b.mark} sub={b.sub} phone={b.phone} strap={b.strap} links={links} cta={cta} />
+  <ProHeader logo={b.logo || undefined} name={b.name} mark={b.mark} sub={b.sub} phone={b.phone} strap={b.strap} links={links} cta={cta} />
   <main class="flex-1" transition:animate={fade({ duration: '0.35s' })}><slot /></main>
-  <ProFooter name={b.name} blurb={b.footerBlurb} phone={b.phone} email={b.email} address={b.address} hours={b.hours}
+  <ProFooter logoLight={b.logoLight || undefined} name={b.name} blurb={b.footerBlurb} phone={b.phone} email={b.email} address={b.address} hours={b.hours}
     explore={[{ text: 'Home', href: getPermalink('/') }, ...links]}
     services={c.services.map((s) => ({ text: s.title, href: getPermalink(`/services/${s.slug}`) }))} cta={cta} />
 </Layout>
